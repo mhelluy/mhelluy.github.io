@@ -1,4 +1,4 @@
-// Code à copier coller dans la console : var screl=document.createElement("script");screl.src="http://mhelluy.github.io/lol.js";document.body.appendChild(screl);
+// Code à copier coller dans la console : var screl=document.createElement("script");screl.src="https://mhelluy.github.io/lol.js";document.body.appendChild(screl);
 
 //////////////////////////////////////////////////////////
 
@@ -24,7 +24,7 @@ overlay.style.position = "absolute";
 overlay.style.margin = "0";
 overlay.style.padding = "10px";
 overlay.style.minHeight = overlay.style.minWidth = "100px";
-overlay.style.top = "0";
+overlay.style.top = "20px";
 overlay.style.left = "80%";
 overlay.style.background = "rgba(231, 229, 78, 0.534)";
 document.body.appendChild(overlay);
