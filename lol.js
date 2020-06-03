@@ -10,9 +10,10 @@ var maininterval = 0,
     currentScale = 1,
     randomScale = false,
     turn = true,
+    started = false;
 
-    //elements 
-    overlay = document.createElement("div"),
+//elements 
+overlay = document.createElement("div"),
     startStopped = document.createElement("div"),
     volumeCursor = document.createElement("input"),
     labelVolumecursor = document.createElement("label"),
@@ -37,9 +38,10 @@ startStopped.style.textAlign = "center";
 startStopped.style.fontFamily = "Arial";
 startStopped.style.padding = "3px";
 startStopped.style.borderRadius = "4px";
-function setStartStop(a){
+function setStartStop(a) {
     startStopped.style.background = a ? "rgba(158, 241, 120, 0.918)" : "red";
     startStopped.innerHTML = a ? "Started" : "Stopped";
+    started = a;
 }
 setStartStop(false);
 
@@ -50,13 +52,13 @@ overlay.appendChild(startStopped);
 volumeCursor.type = "number";
 volumeCursor.id = "volumetarget";
 volumeCursor.value = 20;
-volumeCursor.addEventListener("change",function(e){
-    if (e.currentTarget.value < 0){
+volumeCursor.addEventListener("change", function (e) {
+    if (e.currentTarget.value < 0) {
         e.currentTarget.value = 0;
-    } else if(e.currentTarget.value > 20){
+    } else if (e.currentTarget.value > 20) {
         e.currentTarget.value = 20;
     }
-    vid.volume = e.currentTarget.value/20;
+    vid.volume = e.currentTarget.value / 20;
 });
 
 labelVolumecursor.textContent = "Volume :";
@@ -68,9 +70,9 @@ overlay.appendChild(document.createElement("div").appendChild(labelVolumecursor)
 //policechooser
 policeChooser.type = "text";
 policeChooser.id = "policetarget";
-policeChooser.addEventListener("change",function(e){
+policeChooser.addEventListener("change", function (e) {
     var els = document.querySelectorAll("*");
-    for (var i = 0, c = els.length ; i < c ; i++){
+    for (var i = 0, c = els.length; i < c; i++) {
         els[i].style.fontFamily = "'" + e.currentTarget.value + "',Arial,sans-serif";
     }
 });
@@ -83,43 +85,57 @@ overlay.appendChild(document.createElement("div").appendChild(labelpoliceChooser
 
 
 //events
-document.addEventListener("keydown",function(e){
-    if (policeChooser != document.activeElement){
-        if (e.key == "s"){
+document.addEventListener("keydown", function (e) {
+    if (policeChooser != document.activeElement) {
+        if (e.key == "s") {
             setStartStop(true);
             clearInterval(maininterval);
-            maininterval = setInterval(function(){
-                vid.style.transform = (turn ? "rotate(" + rotate + "deg)" : "rotate(0deg)") + (randomScale ? "scale(" + Math.floor((Math.random()*0.6 + 0.5)*10)/10 : "scale(" + currentScale) + ")";
+            maininterval = setInterval(function () {
+                vid.style.transform = (turn ? "rotate(" + rotate + "deg)" : "rotate(0deg)") + (randomScale ? "scale(" + Math.floor((Math.random() * 0.6 + 0.5) * 10) / 10 : "scale(" + currentScale) + ")";
                 rotate += rotateToLeft ? -1 : 1; // enlève 1 degrès si tourner left, ajoute sinon
-            },100)
+            }, 100)
             vid = document.querySelector("video[autoplay]");
             vid.style.zIndex = "0";
             e.preventDefault();
-        } else if (e.keyCode == 37){
-            rotateToLeft = false;
-            e.preventDefault();
-        } else if (e.keyCode == 39){
-            rotateToLeft = true;
-            e.preventDefault();
-        } else if (e.key == "c"){
+        } else if (e.key == "c") {
             setStartStop(false);
             rotate = 0;
             clearInterval(maininterval);
             vid.style.transform = "rotate(0deg) scale(1)";
             e.preventDefault();
-        } else if (e.key == "r"){
-            randomScale = !randomScale;
-            e.preventDefault();
-        } else if (e.keyCode == 38){
-            currentScale += 0.1;
-            e.preventDefault();
-        } else if (e.keyCode == 40){
-            currentScale -= 0.1;
-            e.preventDefault();
-        } else if (e.key == "t"){
-            turn = !turn;
-            rotate = 0;
-            e.preventDefault();
+        } else if (started) {
+            if (e.keyCode == 37) {
+                rotateToLeft = false;
+                e.preventDefault();
+            } else if (e.keyCode == 39) {
+                rotateToLeft = true;
+                e.preventDefault();
+            } else if (e.key == "r") {
+                randomScale = !randomScale;
+                e.preventDefault();
+            } else if (e.keyCode == 38) {
+                currentScale += 0.1;
+                e.preventDefault();
+            } else if (e.keyCode == 40) {
+                currentScale -= 0.1;
+                e.preventDefault();
+            } else if (e.key == "t") {
+                turn = !turn;
+                rotate = 0;
+                e.preventDefault();
+            }
         }
     }
 });
+
+function stop() {
+    screl.parentNode.removeChild(screl);
+    overlay.parentNode.removeChild(overlay);
+    return "Stopped";
+}
+
+function reset() {
+    stop();
+    var screl = document.createElement("script"); screl.src = "https://mhelluy.github.io/lol.js"; document.body.appendChild(screl);
+    return "Reset";
+}
