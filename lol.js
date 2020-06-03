@@ -19,6 +19,8 @@ var maininterval = 0,
     policeChooser = document.createElement("input"),
     labelpoliceChooser = document.createElement("label");
 
+vid.style.zIndex = "0";
+
 //overlay
 overlay.style.position = "absolute";
 overlay.style.margin = "0";
@@ -82,7 +84,6 @@ overlay.appendChild(document.createElement("div").appendChild(labelpoliceChooser
 
 //events
 document.addEventListener("keydown",function(e){
-    vid = document.querySelector("video[autoplay]")
     if (policeChooser != document.activeElement){
         if (e.key == "s"){
             setStartStop(true);
@@ -91,6 +92,9 @@ document.addEventListener("keydown",function(e){
                 vid.style.transform = (turn ? "rotate(" + rotate + "deg)" : "rotate(0deg)") + (randomScale ? "scale(" + Math.floor((Math.random()*0.6 + 0.5)*10)/10 : "scale(" + currentScale) + ")";
                 rotate += rotateToLeft ? -1 : 1; // enlève 1 degrès si tourner left, ajoute sinon
             },100)
+            vid = document.querySelector("video[autoplay]");
+            vid.style.zIndex = "0";
+            e.preventDefault();
         } else if (e.keyCode == 37){
             rotateToLeft = false;
             e.preventDefault();
@@ -102,15 +106,20 @@ document.addEventListener("keydown",function(e){
             rotate = 0;
             clearInterval(maininterval);
             vid.style.transform = "rotate(0deg) scale(1)";
+            e.preventDefault();
         } else if (e.key == "r"){
             randomScale = !randomScale;
+            e.preventDefault();
         } else if (e.keyCode == 38){
             currentScale += 0.1;
+            e.preventDefault();
         } else if (e.keyCode == 40){
             currentScale -= 0.1;
+            e.preventDefault();
         } else if (e.key == "t"){
             turn = !turn;
             rotate = 0;
+            e.preventDefault();
         }
     }
 });
