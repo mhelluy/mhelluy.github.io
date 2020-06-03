@@ -23,6 +23,7 @@ overlay = document.createElement("div"),
 vid.style.zIndex = "0";
 
 //overlay
+overlay.style.zIndex = "-1";
 overlay.style.position = "absolute";
 overlay.style.margin = "0";
 overlay.style.padding = "10px";
