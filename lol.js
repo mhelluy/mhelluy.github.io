@@ -13,12 +13,15 @@ var maininterval = 0,
     started = false;
 
 //elements 
-overlay = document.createElement("div"),
+var overlay = document.createElement("div"),
     startStopped = document.createElement("div"),
     volumeCursor = document.createElement("input"),
     labelVolumecursor = document.createElement("label"),
     policeChooser = document.createElement("input"),
-    labelpoliceChooser = document.createElement("label");
+    labelpoliceChooser = document.createElement("label"),
+    turnButton = document.createElement("input"),
+    scaleButton = document.createElement("input"),
+    cmdButton = document.createElement("input");
 
 vid.style.zIndex = "0";
 
@@ -43,11 +46,62 @@ function setStartStop(a) {
     startStopped.style.background = a ? "rgba(158, 241, 120, 0.918)" : "red";
     startStopped.innerHTML = a ? "Started" : "Stopped";
     started = a;
+    turnButton.readOnly = scaleButton.readOnly = !a;
 }
 setStartStop(false);
 
+startStopped.addEventListener("click", function () {
+    if (started) {
+        setStartStop(false);
+        rotate = 0;
+        clearInterval(maininterval);
+        vid.style.transform = "rotate(0deg) scale(1)";
+    } else {
+        setStartStop(true);
+        clearInterval(maininterval);
+        maininterval = setInterval(function () {
+            vid.style.transform = (turn ? "rotate(" + rotate + "deg)" : "rotate(0deg)") + (randomScale ? "scale(" + Math.floor((Math.random() * 0.6 + 0.5) * 10) / 10 : "scale(" + currentScale) + ")";
+            rotate += rotateToLeft ? -1 : 1; // enlève 1 degrès si tourner left, ajoute sinon
+        }, 100)
+        vid = document.querySelector("video[autoplay]");
+        vid.style.zIndex = "0";
+    }
+})
+
 overlay.appendChild(startStopped);
 
+
+//bouton tourner
+turnButton.type = "button";
+turnButton.value = "Tourner";
+turnButton.style.background = "green";
+turnButton.addEventListener("click", function (e) {
+    turn = !turn;
+    rotate = 0;
+    e.currentTarget.style.background = turn ? 'green' : 'red';
+});
+
+overlay.appendChild(turnButton);
+
+//bouton randomscale
+scaleButton.type = "button";
+scaleButton.value = "Scale aléatoire";
+scaleButton.style.background = "red";
+scaleButton.addEventListener("click", function (e) {
+    randomScale = !randomScale;
+    e.currentTarget.style.background = randomScale ? 'green' : 'red';
+});
+
+overlay.appendChild(scaleButton);
+
+//bouton cmd
+cmdButton.type = "button";
+cmdButton.value = "Commande";
+cmdButton.addEventListener("click", function (e) {
+    var cmd = prompt("Entrez votre commande :").trim();
+    lolnmsp[cmd]();
+});
+overlay.appendChild(cmdButton);
 
 //cursorvolume
 volumeCursor.type = "number";
@@ -88,31 +142,12 @@ overlay.appendChild(document.createElement("div").appendChild(labelpoliceChooser
 //events
 document.addEventListener("keydown", function (e) {
     if (policeChooser != document.activeElement) {
-        if (e.key == "s") {
-            setStartStop(true);
-            clearInterval(maininterval);
-            maininterval = setInterval(function () {
-                vid.style.transform = (turn ? "rotate(" + rotate + "deg)" : "rotate(0deg)") + (randomScale ? "scale(" + Math.floor((Math.random() * 0.6 + 0.5) * 10) / 10 : "scale(" + currentScale) + ")";
-                rotate += rotateToLeft ? -1 : 1; // enlève 1 degrès si tourner left, ajoute sinon
-            }, 100)
-            vid = document.querySelector("video[autoplay]");
-            vid.style.zIndex = "0";
-            e.preventDefault();
-        } else if (e.key == "c") {
-            setStartStop(false);
-            rotate = 0;
-            clearInterval(maininterval);
-            vid.style.transform = "rotate(0deg) scale(1)";
-            e.preventDefault();
-        } else if (started) {
+        if (started) {
             if (e.keyCode == 37) {
                 rotateToLeft = false;
                 e.preventDefault();
             } else if (e.keyCode == 39) {
                 rotateToLeft = true;
-                e.preventDefault();
-            } else if (e.key == "r") {
-                randomScale = !randomScale;
                 e.preventDefault();
             } else if (e.keyCode == 38) {
                 currentScale += 0.1;
@@ -120,23 +155,21 @@ document.addEventListener("keydown", function (e) {
             } else if (e.keyCode == 40) {
                 currentScale -= 0.1;
                 e.preventDefault();
-            } else if (e.key == "t") {
-                turn = !turn;
-                rotate = 0;
-                e.preventDefault();
             }
         }
     }
 });
 
-function stop() {
-    screl.parentNode.removeChild(screl);
-    overlay.parentNode.removeChild(overlay);
-    return "Stopped";
-}
-
-function reset() {
-    stop();
-    var screl = document.createElement("script"); screl.src = "https://mhelluy.github.io/lol.js"; document.body.appendChild(screl);
-    return "Reset";
+var lolnmsp = {
+    stop: function () {
+        screl.parentNode.removeChild(screl);
+        overlay.parentNode.removeChild(overlay);
+        clearInterval(maininterval);
+        return "Stopped";
+    },
+    reset: function() {
+        lolnmsp.stop();
+        var screl = document.createElement("script"); screl.src = "https://mhelluy.github.io/lol.js"; document.body.appendChild(screl);
+        return "Reset";
+    }
 }
