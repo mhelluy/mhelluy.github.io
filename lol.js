@@ -11,7 +11,10 @@ var maininterval = 0,
     randomScale = false,
     turn = true,
     started = false,
-    pseudo, aud;
+    pseudo, aud,
+    storage;
+
+
 
 //elements 
 var overlay = document.createElement("div"),
@@ -24,8 +27,42 @@ var overlay = document.createElement("div"),
     scaleButton = document.createElement("input"),
     cmdButton = document.createElement("input");
 
+    //commandes
+var lolnmsp = {
+    stop: function () {
+        screl.parentNode.removeChild(screl);
+        overlay.parentNode.removeChild(overlay);
+        clearInterval(maininterval);
+        return "Stopped";
+    },
+    reset: function () {
+        lolnmsp.stop();
+        var screl = document.createElement("script"); screl.src = "https://mhelluy.github.io/lol.js"; document.body.appendChild(screl);
+        return "Reset";
+    },
+    getPseudo: function () {
+        pseudo = prompt("Entrez le pseudo du présentateur :",typeof testScript != "undefined" ? "Pseudo" : "");
+    },
+    getAudio: function () {
+        var displaynames = document.querySelectorAll(".displayname"),
+            participId;
+
+        for (var i = 0, c = displaynames.length; i < c; i++) {
+            if (displaynames[i].innerHTML == pseudo) {
+                participId = displaynames[i].id.replace(/_name/g, "");
+            }
+        }
+
+        if (typeof participId != 'undefined') {
+            aud = document.querySelector("#" + participId + " audio");
+
+        }
+    }
+}
+
 vid.style.zIndex = "0";
 lolnmsp.getPseudo();
+lolnmsp.getAudio();
 
 //overlay
 overlay.style.zIndex = "100";
@@ -34,7 +71,7 @@ overlay.style.margin = "0";
 overlay.style.padding = "10px";
 overlay.style.minHeight = overlay.style.minWidth = "100px";
 overlay.style.top = "20px";
-overlay.style.left = "80%";
+overlay.style.left = "70%";
 overlay.style.background = "rgba(231, 229, 78, 0.534)";
 document.body.appendChild(overlay);
 
@@ -116,7 +153,7 @@ volumeCursor.addEventListener("change", function (e) {
     } else if (e.currentTarget.value > 20) {
         e.currentTarget.value = 20;
     }
-    vid.volume = e.currentTarget.value / 20;
+    aud.volume = e.currentTarget.value / 20;
 });
 
 labelVolumecursor.textContent = "Volume :";
@@ -140,7 +177,71 @@ labelpoliceChooser.htmlFor = "policetarget";
 
 overlay.appendChild(document.createElement("div").appendChild(labelpoliceChooser).parentNode.appendChild(policeChooser).parentNode);
 
+//div réservé aux audios
+var divAudios = document.createElement("div"),
+    inputFile = document.createElement("input");
+divAudios.innerHTML = "<p>Audios :</p>";
+divAudios.style.border = "1px black solid";
+divAudios.style.padding = "5px";
+inputFile.type = "file";
+inputFile.multiple = true;
 
+//class
+function AudioImport(file){
+    var reference = this;
+    var reader = new FileReader();
+    this.display = function(){
+        this.div = document.createElement("div");
+        this.audio = document.createElement("audio");
+        this.audio.controls = true;
+        this.audio.style.maxHeight = "30px";
+        this.audio.style.maxWidth = "50vh";
+        this.delete = document.createElement("p");
+        this.delete.innerHTML = "X";
+        this.delete.style.color = "red";
+        this.delete.style.cursor = "pointer";
+        this.delete.style.marginLeft = "5px";
+        this.div.style.display = "flex";
+        this.label = document.createElement("p");
+        this.label.innerHTML = file.name;
+        this.label.style.overflowWrap = "break-word";
+        this.label.style.maxWidth = "90px";
+        this.label.style.overflow = "hidden";
+        this.label.style.maxHeight = "30px";
+        this.label.style.margin = this.label.style.padding = "0";
+
+        this.label.addEventListener("mouseover",function(){
+            reference.label.style.overflow = "visible";
+        })
+
+        this.label.addEventListener("mouseout",function(){
+            reference.label.style.overflow = "hidden";
+        })
+
+        this.delete.addEventListener("click",function(){
+            reference.div.parentNode.removeChild(reference.div);
+        });
+
+        this.div.appendChild(this.label).parentNode.appendChild(this.audio).parentNode.appendChild(this.delete);
+        divAudios.appendChild(this.div);
+    }
+    this.display();
+    reader.addEventListener("load",function(){
+        reference.audio.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+}
+//
+
+inputFile.addEventListener("change",function(){
+    for (var i = 0, c = inputFile.files.length ; i < c ; i ++){
+            new AudioImport(inputFile.files[i]);
+    }
+    inputFile.value = "";
+});
+
+
+overlay.appendChild(divAudios).appendChild(inputFile);
 
 //events
 document.addEventListener("keydown", function (e) {
@@ -158,41 +259,10 @@ document.addEventListener("keydown", function (e) {
             } else if (e.keyCode == 40) {
                 currentScale -= 0.1;
                 e.preventDefault();
-            }
+            } 
+        }
+        if (e.keyCode == 17) {
+            overlay.style.display = overlay.style.display == "none" ? "block" : "none";
         }
     }
 });
-
-
-//commandes
-var lolnmsp = {
-    stop: function () {
-        screl.parentNode.removeChild(screl);
-        overlay.parentNode.removeChild(overlay);
-        clearInterval(maininterval);
-        return "Stopped";
-    },
-    reset: function () {
-        lolnmsp.stop();
-        var screl = document.createElement("script"); screl.src = "https://mhelluy.github.io/lol.js"; document.body.appendChild(screl);
-        return "Reset";
-    },
-    getPseudo: function () {
-        pseudo = prompt("Entrez le pseudo du présentateur :");
-    },
-    getAudio: function () {
-        var displaynames = document.querySelectorAll(".displayname"),
-            participId;
-
-        for (var i = 0, c = displaynames.length; i < c; i++) {
-            if (displaynames[i].innerHTML == pseudo) {
-                participId = displaynames[i].id.replace(/_name/g, "");
-            }
-        }
-
-        if (typeof participId != 'undefined') {
-            aud = document.querySelector("#" + participId + " audio");
-
-        }
-    }
-}

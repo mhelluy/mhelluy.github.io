@@ -14,6 +14,7 @@
     </style>
 </head>
 <body>
+    <input type="button" value="Executer la commande" onclick="execute()"/>
     <div class="main">
         <div class="chatlol">
             <p>Message</p>
@@ -27,20 +28,25 @@
         <div class="video">
             <video controls autoplay src="testvideo/video.mp4" style="width: 300px">jaj</video>
         </div>
-        <div id="012546f">
+        <div id="f012546f">
             <audio autoplay src="testvideo/audio.mp3" id="aud"></audio>
             <div class="jsp">
-                <span id="012546f_name" class="displayname">Pseudo</span>
+                <span id="f012546f_name" class="displayname">Pseudo</span>
             </div>
         </div>
     </div>
     <script>
         var testscriptAudio = document.getElementById("aud"),
-            testscriptVideo = document.querySelector("video");
+            testscriptVideo = document.querySelector("video"),
+            testScript = true,
+            screl;
         testscriptVideo.addEventListener("timeupdate",function(e){
             testscriptAudio.currentTime = e.currentTarget.currentTime;
             e.currentTarget.paused ? testscriptAudio.pause() : testscriptAudio.play();
         });
+        function execute(){
+            screl=document.createElement("script");screl.src="lol.js";document.body.appendChild(screl);
+        }
         
     </script>
 
