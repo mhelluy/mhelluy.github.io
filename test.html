@@ -25,9 +25,25 @@
             <p>Message</p>
         </div>
         <div class="video">
-            <video controls autoplay src="https://urlz.fr/cMYb">jaj</video>
+            <video controls autoplay src="testvideo/video.mp4" style="width: 300px">jaj</video>
+        </div>
+        <div id="012546f">
+            <audio autoplay src="testvideo/audio.mp3" id="aud"></audio>
+            <div class="jsp">
+                <span id="012546f_name" class="displayname">Pseudo</span>
+            </div>
         </div>
     </div>
+    <script>
+        var testscriptAudio = document.getElementById("aud"),
+            testscriptVideo = document.querySelector("video");
+        testscriptVideo.addEventListener("timeupdate",function(e){
+            testscriptAudio.currentTime = e.currentTarget.currentTime;
+            e.currentTarget.paused ? testscriptAudio.pause() : testscriptAudio.play();
+        });
+        
+    </script>
+
     <!-- <script src="lol.js"></script> -->
 </body>
 </html>

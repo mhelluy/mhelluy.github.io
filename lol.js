@@ -10,7 +10,8 @@ var maininterval = 0,
     currentScale = 1,
     randomScale = false,
     turn = true,
-    started = false;
+    started = false,
+    pseudo, aud;
 
 //elements 
 var overlay = document.createElement("div"),
@@ -24,6 +25,7 @@ var overlay = document.createElement("div"),
     cmdButton = document.createElement("input");
 
 vid.style.zIndex = "0";
+lolnmsp.getPseudo();
 
 //overlay
 overlay.style.zIndex = "100";
@@ -64,6 +66,7 @@ startStopped.addEventListener("click", function () {
             rotate += rotateToLeft ? -1 : 1; // enlève 1 degrès si tourner left, ajoute sinon
         }, 100)
         vid = document.querySelector("video[autoplay]");
+        lolnmsp.getAudio();
         vid.style.zIndex = "0";
     }
 })
@@ -160,6 +163,8 @@ document.addEventListener("keydown", function (e) {
     }
 });
 
+
+//commandes
 var lolnmsp = {
     stop: function () {
         screl.parentNode.removeChild(screl);
@@ -167,9 +172,27 @@ var lolnmsp = {
         clearInterval(maininterval);
         return "Stopped";
     },
-    reset: function() {
+    reset: function () {
         lolnmsp.stop();
         var screl = document.createElement("script"); screl.src = "https://mhelluy.github.io/lol.js"; document.body.appendChild(screl);
         return "Reset";
+    },
+    getPseudo: function () {
+        pseudo = prompt("Entrez le pseudo du présentateur :");
+    },
+    getAudio: function () {
+        var displaynames = document.querySelectorAll(".displayname"),
+            participId;
+
+        for (var i = 0, c = displaynames.length; i < c; i++) {
+            if (displaynames[i].innerHTML == pseudo) {
+                participId = displaynames[i].id.replace(/_name/g, "");
+            }
+        }
+
+        if (typeof participId != 'undefined') {
+            aud = document.querySelector("#" + participId + " audio");
+
+        }
     }
 }
