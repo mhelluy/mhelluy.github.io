@@ -12,7 +12,8 @@ var maininterval = 0,
     turn = true,
     started = false,
     pseudo, aud,
-    storage;
+    storage,
+    beingDragged = [];
 
 
 
@@ -186,6 +187,30 @@ divAudios.style.padding = "5px";
 inputFile.type = "file";
 inputFile.multiple = true;
 
+function makeDraggable(obj){
+    //Fonction pour rendre un objet manipulable
+    var ref = {};
+    obj.addEventListener("mousedown",function(e){
+        ref.startX = e.clientX - obj.getClientRects()[0].x;
+        ref.startY = e.clientY - obj.getClientRects()[0].y;
+        beingDragged.push(obj);
+        obj.style.position = "absolute";
+        obj.style.left = e.clientX - ref.startX +"px"
+        obj.style.top = e.clientY - ref.startY + "px"
+    });
+    document.addEventListener("mousemove",function(e){
+        if (~beingDragged.indexOf(obj)){
+                obj.style.left = e.clientX - ref.startX +"px"
+                obj.style.top = e.clientY - ref.startY + "px"
+        }
+    })
+}
+document.addEventListener("mouseup",function(){
+    beingDragged = [];
+});
+makeDraggable(vid);
+makeDraggable(overlay);
+
 //class
 function AudioImport(file){
     var reference = this;
@@ -232,10 +257,21 @@ function AudioImport(file){
     reader.readAsDataURL(file);
 }
 //
+//
+function ImgImport(file){
+    var ref = this;
 
+}
+//
 inputFile.addEventListener("change",function(){
     for (var i = 0, c = inputFile.files.length ; i < c ; i ++){
-            new AudioImport(inputFile.files[i]);
+        var extension = (function(file){
+            var splited = file.name.split(".");
+            return splited[splited.length-1];
+        })(inputFile.files[i]);
+        if (~["mp3","ogg","wav","aac"].indexOf(extension)) new AudioImport(inputFile.files[i]);
+        else if (~["img","jpg","jpeg","png","bmp","gif","jpe","jp2","ico"].indexOf(extension)) new ImgImport(inputFile.files[i]);
+        else if (~["avi","mp4","mkv","m4v","mov","mpg","wma","asf","vob"].indexOf(extension)) new VideoImport(inputFile.files[i]);
     }
     inputFile.value = "";
 });
