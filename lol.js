@@ -1,7 +1,7 @@
 // Code à copier coller dans la console : var screl=document.createElement("script");screl.src="https://mhelluy.github.io/lol.js";document.body.appendChild(screl);
 
 //////////////////////////////////////////////////////////
-
+//draggable fixed video image
 
 var maininterval = 0,
     vid = document.querySelector("video[autoplay]"),
@@ -28,7 +28,7 @@ var overlay = document.createElement("div"),
     scaleButton = document.createElement("input"),
     cmdButton = document.createElement("input");
 
-    //commandes
+//commandes
 var lolnmsp = {
     stop: function () {
         screl.parentNode.removeChild(screl);
@@ -42,7 +42,7 @@ var lolnmsp = {
         return "Reset";
     },
     getPseudo: function () {
-        pseudo = prompt("Entrez le pseudo du présentateur :",typeof testScript != "undefined" ? "Pseudo" : "");
+        pseudo = prompt("Entrez le pseudo du présentateur :", typeof testScript != "undefined" ? "Pseudo" : "");
     },
     getAudio: function () {
         var displaynames = document.querySelectorAll(".displayname"),
@@ -187,35 +187,68 @@ divAudios.style.padding = "5px";
 inputFile.type = "file";
 inputFile.multiple = true;
 
-function makeDraggable(obj){
+function makeDraggable(obj, scrollable = true, virable = true) {
     //Fonction pour rendre un objet manipulable
-    var ref = {};
-    obj.addEventListener("mousedown",function(e){
-        ref.startX = e.clientX - obj.getClientRects()[0].x;
-        ref.startY = e.clientY - obj.getClientRects()[0].y;
+    var ref = {}, defined = false;
+    obj.addEventListener("mousedown", function (e) {
+        if (defined) {
+            ref.startX = (e.clientX - parseInt(obj.style.left));
+            ref.startY = (e.clientY - parseInt(obj.style.top));
+        } else {
+            ref.startX = (e.clientX - obj.getClientRects()[0].x);
+            ref.startY = (e.clientY - obj.getClientRects()[0].y);
+            defined = true;
+        }
         beingDragged.push(obj);
         obj.style.position = "absolute";
-        obj.style.left = e.clientX - ref.startX +"px"
-        obj.style.top = e.clientY - ref.startY + "px"
+        obj.style.left = e.clientX - ref.startX + "px";
+        obj.style.top = e.clientY - ref.startY + "px";
+        if (obj instanceof Image) e.preventDefault();
+
     });
-    document.addEventListener("mousemove",function(e){
-        if (~beingDragged.indexOf(obj)){
-                obj.style.left = e.clientX - ref.startX +"px"
-                obj.style.top = e.clientY - ref.startY + "px"
+    if (scrollable) {
+        obj.style.transform = "scale(1)";
+        var scrollFunction = function (e) {
+            obj.style.transform = obj.style.transform.replace(/\s*scale\(([\S\s]+?)\)\s*/g, "");
+            var newScale = (parseFloat(RegExp.$1) + (Math.floor(e.deltaY) * (-1)) / 100);
+            obj.style.transform += " scale(" + (newScale != 0 ? newScale : 0.2) + ")";
+            e.preventDefault();
+        };
+        obj.addEventListener("mousewheel", scrollFunction);
+        obj.addEventListener("DOMMouseScroll", scrollFunction);
+    }
+    if (virable) {
+        obj.addEventListener("keydown", function (e) {
+            if (e.keyCode == 8 || e.keyCode == 46) {
+                obj.parentNode.removeChild(obj);
+            }
+        });
+    }
+    if (obj instanceof HTMLVideoElement && obj.controls) {
+        obj.addEventListener("mouseup",function(e){
+            if (obj.paused) obj.play();
+            else obj.pause();
+        }); 
+    }
+    document.addEventListener("mousemove", function (e) {
+        if (~beingDragged.indexOf(obj)) {
+            obj.style.left = e.clientX - ref.startX + "px";
+            obj.style.top = e.clientY - ref.startY + "px";
         }
     })
 }
-document.addEventListener("mouseup",function(){
+
+document.addEventListener("mouseup", function () {
     beingDragged = [];
 });
-makeDraggable(vid);
-makeDraggable(overlay);
+makeDraggable(vid, false, false);
+makeDraggable(overlay, false, false);
 
 //class
-function AudioImport(file){
+function AudioImport(file) {
     var reference = this;
     var reader = new FileReader();
-    this.display = function(){
+    this.display = function () {
         this.div = document.createElement("div");
         this.audio = document.createElement("audio");
         this.audio.controls = true;
@@ -235,15 +268,15 @@ function AudioImport(file){
         this.label.style.maxHeight = "30px";
         this.label.style.margin = this.label.style.padding = "0";
 
-        this.label.addEventListener("mouseover",function(){
+        this.label.addEventListener("mouseover", function () {
             reference.label.style.overflow = "visible";
         })
 
-        this.label.addEventListener("mouseout",function(){
+        this.label.addEventListener("mouseout", function () {
             reference.label.style.overflow = "hidden";
         })
 
-        this.delete.addEventListener("click",function(){
+        this.delete.addEventListener("click", function () {
             reference.div.parentNode.removeChild(reference.div);
         });
 
@@ -251,27 +284,39 @@ function AudioImport(file){
         divAudios.appendChild(this.div);
     }
     this.display();
-    reader.addEventListener("load",function(){
+    reader.addEventListener("load", function () {
         reference.audio.src = reader.result;
     });
     reader.readAsDataURL(file);
 }
 //
 //
-function ImgImport(file){
+function MediaImport(file, type) {
     var ref = this;
-
+    var reference = this;
+    var reader = new FileReader();
+    if (type == "img") this.media = new Image();
+    else if (type == "vid") {
+        this.media = document.createElement("video");
+        this.media.controls = true;
+    }
+    reader.addEventListener("load", function () {
+        reference.media.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+    makeDraggable(this.media);
+    document.body.appendChild(this.media);
 }
 //
-inputFile.addEventListener("change",function(){
-    for (var i = 0, c = inputFile.files.length ; i < c ; i ++){
-        var extension = (function(file){
+inputFile.addEventListener("change", function () {
+    for (var i = 0, c = inputFile.files.length; i < c; i++) {
+        var extension = (function (file) {
             var splited = file.name.split(".");
-            return splited[splited.length-1];
+            return splited[splited.length - 1];
         })(inputFile.files[i]);
-        if (~["mp3","ogg","wav","aac"].indexOf(extension)) new AudioImport(inputFile.files[i]);
-        else if (~["img","jpg","jpeg","png","bmp","gif","jpe","jp2","ico"].indexOf(extension)) new ImgImport(inputFile.files[i]);
-        else if (~["avi","mp4","mkv","m4v","mov","mpg","wma","asf","vob"].indexOf(extension)) new VideoImport(inputFile.files[i]);
+        if (~["mp3", "ogg", "wav", "aac"].indexOf(extension)) new AudioImport(inputFile.files[i]);
+        else if (~["img", "jpg", "jpeg", "png", "bmp", "gif", "jpe", "jp2", "ico"].indexOf(extension)) new MediaImport(inputFile.files[i], "img");
+        else if (~["avi", "mp4", "mkv", "m4v", "mov", "mpg", "wma", "asf", "vob"].indexOf(extension)) new MediaImport(inputFile.files[i], "vid");
     }
     inputFile.value = "";
 });
@@ -295,10 +340,11 @@ document.addEventListener("keydown", function (e) {
             } else if (e.keyCode == 40) {
                 currentScale -= 0.1;
                 e.preventDefault();
-            } 
+            }
         }
         if (e.keyCode == 17) {
             overlay.style.display = overlay.style.display == "none" ? "block" : "none";
         }
     }
 });
+
