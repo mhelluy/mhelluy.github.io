@@ -212,6 +212,10 @@ function makeDraggable(obj, scrollable = true, virable = true) {
             obj.style.transform = obj.style.transform.replace(/\s*scale\(([\S\s]+?)\)\s*/g, "");
             var newScale = (parseFloat(RegExp.$1) + (Math.floor(e.deltaY) * (-1)) / 100);
             obj.style.transform += " scale(" + (newScale != 0 ? newScale : 0.2) + ")";
+            obj.style.zIndex = "99";
+            obj.style.position = "absolute";
+            obj.style.left = "0";
+            obj.style.top = "0";
             e.preventDefault();
         };
         obj.addEventListener("mousewheel", scrollFunction);
