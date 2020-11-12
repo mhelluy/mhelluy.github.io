@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire 5G</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Questionnaire : l'arrivée de la 5G</h1>
+    <p>Répondez aux questions suivantes. Vos réponses sont collectées de manière complètement anonyme.</p>
+    <form>
+        <table>
+            <tr>
+                <td class="bold">Question</td>
+                <td class="bold" colspan="60">Réponse</td>
+            </tr>
+            <tr>
+                <td>De quel pays êtes-vous originaire ?</td>
+                <td colspan="60">
+                    <input type='text'/>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">Avez-vous obtenu le baccalauréat ?</td>
+                <td colspan="50">
+                    <div style="display:flex; justify-content: space-around; align-items: center;"><label
+                            style="display: block" for="0obtentionbac">Oui, et je l'ai passé dans la filière suivante
+                            :</label><br /><input type='radio' id='0obtentionbac' name='obtentionbac' />
+                        <hr class="vr" />
+                        <label style="display: block" for="1obtentionbac">Non, mais je compte le passer dans la filière
+                            suivante :</label><br /><input type='radio' id='1obtentionbac' name='obtentionbac' /></div>
+                </td>
+                <td colspan="10"><label for='2obtentionbac'>Je n’ai pas le bac et ne compte pas le
+                        passer</label><br /><input type='radio' id='2obtentionbac' name='obtentionbac' /></td>
+            </tr>
+            <tr style="font-size: 0.75em">
+                <td colspan="10"><label for='0filierebac'>Filière S (scientifique)</label><br /><input type='radio'
+                        id='0filierebac' name='filierebac' /></td>
+                <td colspan="10"><label for='3filierebac'>Filière L (littéraire)</label><br /><input type='radio'
+                        id='3filierebac' name='filierebac' /></td>
+                <td colspan="10"><label for='2filierebac'>Filière ES (économique et sociale)</label><br /><input
+                        type='radio' id='2filierebac' name='filierebac' /></td>
+                <td colspan="10"><label for='4filierebac'>Bac général (nouvelle formule)</label><br /><input
+                        type='radio' id='4filierebac' name='filierebac' /></td>
+                <td colspan="10"><label for='5filierebac'>Bac professionnel ou technologique</label><br /><input
+                        type='radio' id='5filierebac' name='filierebac' /></td>
+                <td colspan="10"></td>
+            </tr>
+            <tr>
+                <td rowspan="2">Avez-vous réalisé des études dans le supérieur ?</td>
+                <td colspan="49">
+                    <div style="display:flex; justify-content: space-around; align-items: center;"><label
+                            style="display: block" for="0etudessup_yn">Oui, et j'ai effectué :</label><br /><input
+                            type='radio' id='0etudessup_yn' name='etudessup_yn' />
+                        <hr class="vr" />
+                        <label style="display: block" for="1etudessup_yn">Non, mais je compte réaliser
+                            :</label><br /><input type='radio' id='1etudessup_yn' name='etudessup_yn' /></div>
+                </td>
+                <td colspan="11"><label for='2etudessup_yn'>Je n’ai pas réalisé d'études dans le supérieur et ne compte
+                        pas en
+                        réaliser.</label><br /><input type='radio' id='2etudessup_yn' name='etudessup_yn' /></td>
+
+            </tr>
+            <tr style="font-size: 0.75em">
+                <td colspan="7"><label for='0etudes_superieur'>Des études plutôt scientifiques</label><br /><input
+                        type='radio' id='0etudes_superieur' name='etudes_superieur' /></td>
+                <td colspan="7"><label for='1etudes_superieur'>Des études plutôt littéraires</label><br /><input
+                        type='radio' id='1etudes_superieur' name='etudes_superieur' /></td>
+                <td colspan="7"><label for='2etudes_superieur'>Des études plutôt tournées vers l’économie et la
+                        sociologie</label><br /><input type='radio' id='2etudes_superieur' name='etudes_superieur' />
+                </td>
+                <td colspan="7"><label for='3etudes_superieur'>Des études plutôt tournées vers les métiers du
+                        sport</label><br /><input type='radio' id='3etudes_superieur' name='etudes_superieur' /></td>
+                <td colspan="7"><label for='4etudes_superieur'>Des études plutôt tournées vers le droit et/ou
+                        l’administration</label><br /><input type='radio' id='4etudes_superieur'
+                        name='etudes_superieur' /></td>
+                <td colspan="7"><label for='5etudes_superieur'>Des études en Histoire</label><br /><input type='radio'
+                        id='5etudes_superieur' name='etudes_superieur' /></td>
+                <td colspan="7"><label for='7etudes_superieur'>Autre :<input type="text" /></label><br /><input
+                        type='radio' id='7etudes_superieur' name='etudes_superieur' /></td>
+                <td colspan="11"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="bold">Question</td>
+                <td class="bold" colspan="60">Réponse</td>
+            </tr>
+            <tr>
+                <td>Quel parti politique soutenez vous le plus parmi ceux ci ?</td>
+                <td colspan="8"><label for='0partpol'>EELV</label><br /><input type='radio' id='0partpol'
+                        name='partpol' /></td>
+                <td colspan="8"><label for='1partpol'>LFI</label><br /><input type='radio' id='1partpol'
+                        name='partpol' /></td>
+                <td colspan="8"><label for='2partpol'>PS</label><br /><input type='radio' id='2partpol'
+                        name='partpol' /></td>
+                <td colspan="8"><label for='3partpol'>LREM</label><br /><input type='radio' id='3partpol'
+                        name='partpol' /></td>
+                <td colspan="8"><label for='4partpol'>LR</label><br /><input type='radio' id='4partpol'
+                        name='partpol' /></td>
+                <td colspan="8"><label for='5partpol'>RN</label><br /><input type='radio' id='5partpol'
+                        name='partpol' /></td>
+                <td colspan="12"><label for='6partpol'>aucun de ceux proposés</label><br /><input type='radio'
+                        id='6partpol' name='partpol' /></td>
+            </tr>
+            <tr>
+                <td>À quel point êtes vous satisfait de l'action du gouvernement actuel ? <em>(sur une échelle de 1 à
+                        10,
+                        1 étant la pire note et 10 la meilleure, 5 exprimant la neutralité)</em></td>
+                <td colspan="6"><label for='0satisfgovern'>1</label><br /><input type='radio' id='0satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='1satisfgovern'>2</label><br /><input type='radio' id='1satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='2satisfgovern'>3</label><br /><input type='radio' id='2satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='3satisfgovern'>4</label><br /><input type='radio' id='3satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='4satisfgovern'>5</label><br /><input type='radio' id='4satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='5satisfgovern'>6</label><br /><input type='radio' id='5satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='6satisfgovern'>7</label><br /><input type='radio' id='6satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='7satisfgovern'>8</label><br /><input type='radio' id='7satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='8satisfgovern'>9</label><br /><input type='radio' id='8satisfgovern'
+                        name='satisfgovern' /></td>
+                <td colspan="6"><label for='9satisfgovern'>10</label><br /><input type='radio' id='9satisfgovern'
+                        name='satisfgovern' /></td>
+            </tr>
+            <tr>
+                <td>Pensez vous que, comme l’affirme Emmanuel macron, la France doit “prendre le tournant de la 5G” ?
+                </td>
+                <td colspan="15"><label for='0tournant_5G'>Oui </label><br /><input type='radio' id='0tournant_5G'
+                        name='tournant_5G' /></td>
+                <td colspan="15"><label for='1tournant_5G'>Plutôt oui</label><br /><input type='radio' id='1tournant_5G'
+                        name='tournant_5G' /></td>
+
+                <td colspan="15"><label for='3tournant_5G'>Plutôt non</label><br /><input type='radio' id='3tournant_5G'
+                        name='tournant_5G' /></td>
+                <td colspan="15"><label for='2tournant_5G'>Non</label><br /><input type='radio' id='2tournant_5G'
+                        name='tournant_5G' /></td>
+            </tr>
+            <tr>
+                <td>Pour qui avez vous voté au premier tour pour les 3 dernières élections présidentielles en France ? </td>
+                <td colspan="20" style="font-size: 0.8em;">
+                    <label for="tpres1">Élection de 2007</label>
+                    <input type="text" id="tpres1"/>
+                    <hr />
+                    <label for='pres1a'>Je me suis abstenu</label><input type="radio" name='pres1' id="pres1a" />
+                    <hr />
+                    <label for='pres1b'>Je n'avais pas le droit de voter <em>(âge inférieur à 18 ans, pas de nationalité
+                            française, etc.)</em></label><input type="radio" name='pres1' id="pres1b" />
+                </td>
+                <td colspan="20" style="font-size: 0.8em;">
+                    <label for="tpres2">Élection de 2012</label>
+                    <input type="text" id="tpres2"/>
+                    <hr />
+                    <label for='pres2a'>Je me suis abstenu</label><input type="radio" name='pres2' id="pres2a" />
+                    <hr />
+                    <label for='pres2b'>Je n'avais pas le droit de voter <em>(âge inférieur à 18 ans, pas de nationalité
+                            française, etc.)</em></label><input type="radio" name='pres2' id="pres2b" />
+                </td>
+                <td colspan="20" style="font-size: 0.8em;">
+                    <label for="tpres3">Élection de 2017</label>
+                    <input type="text" id="tpres3"/>
+                    <hr />
+                    <label for='pres3a'>Je me suis abstenu</label><input type="radio" name='pres3' id="pres3a" />
+                    <hr />
+                    <label for='pres3b'>Je n'avais pas le droit de voter <em>(âge inférieur à 18 ans, pas de nationalité
+                            française, etc.)</em></label><input type="radio" name='pres3' id="pres3b" />
+                </td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td class="bold">Question</td>
+                <td class="bold" colspan="60">Réponse</td>
+            </tr>
+            <tr>
+                <td>Choisissez la description qui correspond le mieux a la 5G en fonction de ce que vous en savez.</td>
+                <td colspan="15"><label for='0def_5G'>la 5G est l’évolution de la fibre, c’est un réseau filaire qui
+                        permet un débit
+                        supérieur a celle ci.</label><br /><input type='radio' id='0def_5G' name='def_5G' /></td>
+                <td colspan="15"><label for='1def_5G'>c’est la version succédant à la 4G mais je n’en sais pas
+                        plus.</label><br /><input type='radio' id='1def_5G' name='def_5G' /></td>
+                <td colspan="15"><label for='2def_5G'>la 5G est un système faisant intervenir antennes et satellites
+                        donnant accès à Internet (depuis un smartphone notamment) avec des ondes à très haute fréquence
+                        permettant un très haut débit de connexion </label><br /><input type='radio' id='2def_5G'
+                        name='def_5G' /></td>
+                <td colspan="15"><label for='3def_5G'>c’est un programme, proposé par le gouvernement américain et
+                        repris
+                        par de
+                        nombreux pays, qui vise à permettre un accès au Wi-Fi, gratuit ou payant, partout ou dans le
+                        plus de lieux possibles d’ici 2023</label><br /><input type='radio' id='3def_5G'
+                        name='def_5G' /></td>
+            </tr>
+            <tr>
+                <td>Selon vous, la 5G cause-t-elle des problèmes de santé ?</td>
+                <td colspan="15"><label for='05G_sante'>Oui</label><br /><input type='radio' id='05G_sante'
+                        name='5G_sante' /></td>
+                <td colspan="15"><label for='15G_sante'>Oui, mais mineurs</label><br /><input type='radio'
+                        id='15G_sante' name='5G_sante' /></td>
+                <td colspan="15"><label for='25G_sante'>Je ne sais pas</label><br /><input type='radio' id='25G_sante'
+                        name='5G_sante' /></td>
+                <td colspan="15"><label for='35G_sante'>Non</label><br /><input type='radio' id='35G_sante'
+                        name='5G_sante' /></td>
+            </tr>
+            <tr>
+                <td>Selon vous, la 5G est-elle néfaste pour la planète ? <em>(ex : cause-t-elle de la pollution ?
+                        aggrave-t-elle le changement climatique ?)</em>
+                </td>
+                <td colspan="15"><label for='05G_environment'>oui</label><br /><input type='radio' id='05G_environment'
+                        name='5G_environment' /></td>
+                <td colspan="15"><label for='15G_environment'>oui mais mineurs</label><br /><input type='radio'
+                        id='15G_environment' name='5G_environment' /></td>
+                <td colspan="15"><label for='25G_environment'>non</label><br /><input type='radio' id='25G_environment'
+                        name='5G_environment' /></td>
+                <td colspan="15"><label for='35G_environment'>je ne sais pas</label><br /><input type='radio'
+                        id='35G_environment' name='5G_environment' /></td>
+            </tr>
+            <tr>
+                <td>
+                    Sur une échelle de 1 à 10, à quel point pensez-vous que la 5G est une avancée ? <em>(1 = ce n'est
+                        pas
+                        une avancée, 10 = c'est le progrès du siècle !)</em>
+                </td>
+                <td colspan="6"><label for='05G_avancee'>1</label><br /><input type='radio' id='05G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='15G_avancee'>2</label><br /><input type='radio' id='15G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='25G_avancee'>3</label><br /><input type='radio' id='25G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='35G_avancee'>4</label><br /><input type='radio' id='35G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='45G_avancee'>5</label><br /><input type='radio' id='45G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='55G_avancee'>6</label><br /><input type='radio' id='55G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='65G_avancee'>7</label><br /><input type='radio' id='65G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='75G_avancee'>8</label><br /><input type='radio' id='75G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='85G_avancee'>9</label><br /><input type='radio' id='85G_avancee'
+                        name='5G_avancee' />
+                </td>
+                <td colspan="6"><label for='95G_avancee'>10</label><br /><input type='radio' id='95G_avancee'
+                        name='5G_avancee' />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var listeV = []
+            $("td label").each(function (i, el) {
+                listeV.push($(el).text());
+            });
+            $("td input[type='radio']").each(function (i, el) {
+                $(el).attr("value", listeV[i]);
+            });
+            // $(document).click(function(){
+            //     console.log($("input[name='5G_avancee']:checked").val())
+            // });
+
+        });
+    </script>
+</body>
+
+</html>
