@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Quest quiz maker</title>
+</head>
+
+<body>
+    <div id="main">
+        <div id="start">
+            <label for="nomquiz">Entrez le nom du quiz :</label><input type="text" id="nomquiz"/>
+            <button id="startbutton">Commencer</button>
+        </div>
+        
+        <div id="questions">
+
+        </div>
+        <button id="addquestion">Ajouter une question</button>
+        <br/>
+        <br/>
+        <button id="generate">Générer le contenu du fichier JSON</button>
+        <div id="content_generated">
+            <p>Copiez-collez le contenu de cette zone de texte dans un fichier et renommez-le en <i>[nomQuiz].json</i></p>
+            <textarea id="filecontent"></textarea>
+        </div>
+    </div>
+    <div id="overlay">
+        <div id="imagesmenu">
+            <h2>Insérer une image</h2>
+                <fieldset>
+                    <legend>Via URL</legend>
+                    <input checked type="radio" id="select_url" name="select"><label for="select_url">Entrer l'URL de l'image :
+                    </label><br />
+                    <p><i>Attention : assurez-vous que l'URL renvoie bien directement vers l'image souhaitée</i></p>
+                    <input type="text" id="entry_url" />
+                </fieldset>
+                <fieldset>
+                    <legend>Avec un fichier image personnel</legend>
+                    <input type="radio" id="select_file" name="select"><label for="select_file">Importer un fichier
+                        image pour le quiz : </label>
+                    <p id="expimport">Vous devez créer un <b>dossier</b> nommé <i>[nomQuiz].resources</i> et placer vos images dedans. Le
+                        dossier doit en suite se trouver dans le même
+                        répertoire que le fichier
+                        JSON généré pour lancer le quiz.</p>
+                    <label for="entry_file">Entrez le nom du fichier image (<b>avec l'extension</b>) ici :
+                    </label><input type="text" id="entry_file" disabled/>
+                </fieldset>
+                <button id="okbutton" disabled>Insérer</button>
+                <button id="cancelbutton">Annuler</button>
+
+
+        </div>
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
