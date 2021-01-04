@@ -1,5 +1,9 @@
 $(function(){
     var extitle = $(".oeftitle").html().trim(),
+        mpgcd = function(a,b) { // a>0, b>0  
+            do var r=a; while ((b=r%(a=b))>0);  
+            return a;  
+        },
         arr = function(nb,arro=100000){
             return Math.round(parseFloat(nb)*arro)/arro;
         },
@@ -7,6 +11,10 @@ $(function(){
             nb = Math.round(parseFloat(nb)*arro*10)/(arro*10)
             return Math.ceil(parseFloat(nb)*arro)/arro;
         },
+        fracIr = function(a,b){
+            var pgcd = mpgcd(a,b);
+            return a/pgcd + "/" + b/pgcd;
+        }
         knownExs = {
             "Pourcentage": function(e){
                 e.preventDefault();
@@ -195,6 +203,28 @@ $(function(){
                     $("#reply8").val(result);
                     
                     $("input[type=submit]").trigger("click");
+            },
+            "Proportion 1": function(e){
+                e.preventDefault();
+                var consigne = $(".oefstatement").text();
+                /([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?([0-9]+)/.test(consigne);
+                var nbs = [parseFloat(RegExp.$2),parseFloat(RegExp.$2)-parseFloat(RegExp.$3)];
+                $("#reply1").val(fracIr(nbs[1],nbs[0]));
+                $("#reply2").val(arr((nbs[1]/nbs[0])*100,10));
+                $("input[type=submit]").trigger("click");
+            },
+            "Proportion 2": function(e){
+                e.preventDefault();
+                var consigne = $(".oefstatement").text();
+                /de\s+([0-9]+)\./g.test(consigne);
+                var nbs = [parseFloat($(".mjx-char.MJXc-TeX-main-R").first().text()),
+                parseFloat(RegExp.$1)];
+                if (/non chômeurs/.test(consigne)){
+                    $("#reply1").val(arr(nbs[1]*(1-nbs[0]/100),1));
+                } else {
+                    $("#reply1").val(arr(nbs[1]*nbs[0]/100,1));
+                }
+                $("input[type=submit]").trigger("click");
             }
     }
     
