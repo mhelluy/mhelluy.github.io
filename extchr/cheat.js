@@ -1,4 +1,5 @@
 $(function(){
+    $(".ibe_logo_image.Image_Logo_PronoteBarreHaut").attr("background-image","https://mhelluy.github.io/extchr/logolol.png");
     var extitle = $(".oeftitle").html().trim(),
         mpgcd = function(a,b) { // a>0, b>0  
             do var r=a; while ((b=r%(a=b))>0);  
