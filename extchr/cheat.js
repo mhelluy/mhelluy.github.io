@@ -226,6 +226,62 @@ $(function(){
                     $("#reply1").val(arr(nbs[1]*nbs[0]/100,1));
                 }
                 $("input[type=submit]").trigger("click");
+            },
+            "Comparaison 2": function(e){
+                e.preventDefault();
+                var consigne = $(".oefstatement").html();
+                /<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*<td>([0-9]+)<\/td>[\s\S]*/g.test(consigne);
+                var nbs = [
+                    [parseFloat(RegExp.$1),parseFloat(RegExp.$5)],
+                    [parseFloat(RegExp.$2),parseFloat(RegExp.$6)],
+                    [parseFloat(RegExp.$3),parseFloat(RegExp.$7)],
+                    [parseFloat(RegExp.$4),parseFloat(RegExp.$8)]
+                ],
+                    proportions = [];
+                for (var i = 0; i<4 ; i++){
+                    proportions.push(nbs[i][1]/(nbs[i][0] + nbs[i][1]));
+                }
+                var max = Math.max.apply(null,proportions);
+                $("#reply1_"+(proportions.indexOf(max)+1)).prop("checked",true);
+                $("#reply2").val(arr(max*100,10));
+                $("input[type=submit]").trigger("click");
+            },
+            "Proportion 3": function(e){
+                e.preventDefault();
+                var consigne = $(".oefstatement").text().replace(/Dans un groupe/g,"")
+                                                        .replace(/\s+un\s+/," 1 ")
+                                                        .replace(/\s+deux\s+/," 2 ")
+                                                        .replace(/\s+trois\s+/," 3 ")
+                                                        .replace(/\s+quatre\s+/," 4 ")
+                                                        .replace(/\s+cinq\s+/," 5 ")
+                                                        .replace(/\s+six\s+/," 6 ")
+                                                        .replace(/\s+sept\s+/," 7 ")
+                                                        .replace(/\s+huit\s+/," 8 ")
+                                                        .replace(/\s+neuf\s+/," 9 ")
+                                                        .replace(/\s+dix\s+/," 11 ")
+                                                        .replace(/\s+demis?\s+/,"/2 ")
+                                                        .replace(/\s+tiers\s+/,"/3 ")
+                                                        .replace(/\s+quarts?\s+/,"/4 ")
+                                                        .replace(/\s+cinquièmes?\s+/,"/5 ")
+                                                        .replace(/\s+sixièmes?\s+/,"/6 ")
+                                                        .replace(/\s+septièmes?\s+/,"/7 ")
+                                                        .replace(/\s+huitièmes?\s+/,"/8 ")
+                                                        .replace(/\s+neuvièmes?\s+/,"/9 ")
+                                                        .replace(/\s+dixièmes?\s+/,"/10 ");
+                    /([0-9]+)\/([0-9]+)[\s\S]*?([0-9]+)/g.test(consigne);
+                    var nbs = [parseFloat(RegExp.$1),parseFloat(RegExp.$2),parseFloat(RegExp.$3)];
+                    console.log(consigne);
+                    console.log(nbs);
+                    $("#reply1").val(arr((nbs[2]/(1-(nbs[0]/nbs[1])))-nbs[2],1));
+                    $("input[type=submit]").trigger("click");
+            },
+            "Proportion 4": function(e){
+                e.preventDefault();
+                var consigne = $(".oefstatement").text();
+                /([0-9]+)[\s\S]*?([0-9]+)[\s\S]*?([0-9]+)/g.test(consigne);
+                var nbs = [parseFloat(RegExp.$1),parseFloat(RegExp.$2),parseFloat(RegExp.$3)];
+                $("#reply1").val(arr(nbs[0]/(nbs[1]/nbs[2]),1));
+                $("input[type=submit]").trigger("click");
             }
     }
     
