@@ -285,6 +285,15 @@ $(function(){
                 var nbs = [parseFloat(RegExp.$1),parseFloat(RegExp.$2),parseFloat(RegExp.$3)];
                 $("#reply1").val(arr(nbs[0]/(nbs[1]/nbs[2]),1));
                 $("input[type=submit]").trigger("click");
+            },
+            "Proportion de proportion 2": function(e){
+                e.preventDefault();
+                var consigne = $(".oefstatement").text();
+                /([0-9]+(?:\.[0-9]+)?)\s+%[\s\S]*?([0-9]+(?:\.[0-9]+)?)\s+%/g.test(consigne);
+                var nbs = [parseFloat(RegExp.$1),parseFloat(RegExp.$2)];
+                console.log(nbs);
+                $("#reply1").val(arr((nbs[1]/nbs[0])*100,10));
+                $("input[type=submit]").trigger("click");
             }
     }
     $(".wims_exo_item").each(function(i,v){
