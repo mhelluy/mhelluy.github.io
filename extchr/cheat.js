@@ -1,7 +1,10 @@
 $(function(){
-    $(".ibe_logo_image.Image_Logo_PronoteBarreHaut").attr("background-image","https://mhelluy.github.io/extchr/logolol.png");
-    var extitle = $(".oeftitle").html().trim(),
-        mpgcd = function(a,b) { // a>0, b>0  
+    if ($(".oeftitle").get().length > 0){
+        var extitle = $(".oeftitle").html().trim();
+    } else {
+        var extitle = "NONE";
+    }
+    var mpgcd = function(a,b) { // a>0, b>0  
             do var r=a; while ((b=r%(a=b))>0);  
             return a;  
         },
@@ -284,6 +287,13 @@ $(function(){
                 $("input[type=submit]").trigger("click");
             }
     }
+    $(".wims_exo_item").each(function(i,v){
+        if (~Object.keys(knownExs).indexOf($("#"+$(v).attr("id")+" a").html().trim())){
+            $(v).append("<p style='color: green;'>cheat : oui</p>");
+        } else {
+            $(v).append("<p style='color: red;'>cheat : non</p>");
+        }
+    });
     
     if (~Object.keys(knownExs).indexOf(extitle)){
         $(".send_answer").after("<button id='cheat_auto'>Automatique</button>");
