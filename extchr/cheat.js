@@ -20,21 +20,70 @@ $(function () {
             return a / pgcd + "/" + b / pgcd;
         }
     knownExs = {
-        "Trouver la formule (guidé 2)":function(e){
+        "Expression algébrique d'une fonction 1": function(e){
+            e.preventDefault();
+            var consigne = [];
+            $(".mjx-char.MJXc-TeX-main-R, .mjx-char.MJXc-TeX-math-I").each(function (i, v) {
+                var current = $(v).text();
+                if (v.parentNode.parentNode.parentNode.className == "mjx-denominator"){
+                    consigne.push("/");
+                }
+                consigne.push(current);
+            });
+            consigne = consigne.join("").replace(/−/g,"-");
+            /([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)/.test(consigne);
+            consigne = consigne.replace(/([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)/,arr(parseFloat(RegExp.$1)/parseFloat(RegExp.$2)));
+            /ff\(([\s\S]+?)\)=([\s\S]+?)ff/.test(consigne);
+            var nbs = [parseFloat(RegExp.$1),RegExp.$2]
+            console.log(nbs);
+            var a = arr(nbs[1] / nbs[0]);
+            if (!~[0,1,-1].indexOf(a)) {
+                $("#reply1").val(a+"x");
+            } else if (a==1){
+                $("#reply1").val("x");
+            } else if (a==-1){
+                $("#reply1").val("-x");
+            } else{
+                $("#reply1").val("0");
+            }
+            $("input[type=submit]").trigger("click");
+        },
+        "Trouver la formule.": function (e) {
             e.preventDefault();
             var nbs = [];
-            $(".wims_mathml").each(function(i,v){
-                nbs.push($(v).text().replace(/^([\s\S]+?)<math[\s\S]*?<\/math>/g,"$1"));
-                nbs[i] = nbs[i].substring(nbs[i].length/2);
-                if(~[1,2,3,4,21,22].indexOf(i)){
-                    nbs[i] = parseFloat(nbs[i].replace("−","-"));
+            $(".wims_mathml").each(function (i, v) {
+                var current = $(v).text().replace(/^([\s\S]+?)<math[\s\S]*?<\/math>/g, "$1");
+                current = current.substring(current.length / 2)
+                if (~[0, 2, 3, 4].indexOf(i)) {
+                    nbs.push(parseFloat(current.replace("−", "-")));
                 }
             });
-            var a = arr((nbs[2]-nbs[4])/(nbs[1]-nbs[3])),
-                b = arr(nbs[2]-a*nbs[1]);
-            if  (/Question\s*3/.test($(".oefstatement").html())){
+            var a = arr((nbs[1] - nbs[3]) / (nbs[0] - nbs[2])),
+                b = arr(nbs[1] - a * nbs[0]);
+            if (a == 0) {
+                $("#reply1").val(b);
+            } else if (b == 0) {
+                $("#reply1").val(a + "x");
+            } else {
+                $("#reply1").val(a + "x+" + b);
+            }
+            $("input[type=submit]").trigger("click");
+        },
+        "Trouver la formule (guidé 2)": function (e) {
+            e.preventDefault();
+            var nbs = [];
+            $(".wims_mathml").each(function (i, v) {
+                nbs.push($(v).text().replace(/^([\s\S]+?)<math[\s\S]*?<\/math>/g, "$1"));
+                nbs[i] = nbs[i].substring(nbs[i].length / 2);
+                if (~[1, 2, 3, 4, 21, 22].indexOf(i)) {
+                    nbs[i] = parseFloat(nbs[i].replace("−", "-"));
+                }
+            });
+            var a = arr((nbs[2] - nbs[4]) / (nbs[1] - nbs[3])),
+                b = arr(nbs[2] - a * nbs[1]);
+            if (/Question\s*3/.test($(".oefstatement").html())) {
                 $("#reply3").val(b);
-            } else if (/Question\s*2/.test($(".oefstatement").html())){
+            } else if (/Question\s*2/.test($(".oefstatement").html())) {
                 $("#reply2").val(a + " * " + nbs[21] + " + b = " + nbs[22]);
             } else {
                 $("#reply1").val(a);
