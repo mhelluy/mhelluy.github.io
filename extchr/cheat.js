@@ -20,6 +20,22 @@ $(function () {
             return a / pgcd + "/" + b / pgcd;
         }
     knownExs = {
+        "Développer (a+b)² #": function(e){
+            e.preventDefault();
+            var nbs = $(".mjx-mstyle").text().replace(/(?:\)2|[\(\s=])/g,"").split("+");
+            if (/x/.test(nbs[0])){
+                var xpos = 0;
+                nbs[0] = nbs[0].replace(/x/g,"");
+            } else {
+                var xpos = 1;
+                nbs[1] = nbs[1].replace(/x/g,"");
+            }
+            nbs[0] = parseFloat(nbs[0]);
+            nbs[1] = parseFloat(nbs[1]);
+            $("#reply8").val((nbs[xpos]*nbs[xpos])+"x^2 + "+(2*nbs[0]*nbs[1])+"x + "+(nbs[Number(!xpos)]*nbs[Number(!xpos)]));
+            $("input[type=submit]").trigger("click");
+            
+        },
         "Expression algébrique d'une fonction 1": function(e){
             e.preventDefault();
             var consigne = [];
