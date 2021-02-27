@@ -20,46 +20,66 @@ $(function () {
             return a / pgcd + "/" + b / pgcd;
         }
     knownExs = {
-        "Développer (a+b)² #": function(e){
+        "Développer (a-b)(a+b)#": function (e) {
             e.preventDefault();
-            var nbs = $(".mjx-mstyle").text().replace(/(?:\)2|[\(\s=])/g,"").split("+");
-            if (/x/.test(nbs[0])){
+            var nbs = $(".mjx-mrow").first().text();
+            nbs = nbs.substring(0, nbs.length / 2).replace(/[\(\)\s]/g, "").split(/[+−]/g);
+            var regelettre = /([abcdefghijklmnopqrstuvwxyz])/g;
+            if (regelettre.test(nbs[0])) {
+                var xalt = RegExp.$1;
+                nbs[0] = nbs[0].replace(regelettre, "");
+                nbs[0] = parseFloat(nbs[0]);
+                nbs[1] = parseFloat(nbs[1]);
+                $("#reply3").val((nbs[0] * nbs[0]) + xalt + "^2 - " + (nbs[1] * nbs[1]));
+            } else if (regelettre.test(nbs[1])) {
+                var xalt = RegExp.$1;
+                nbs[1] = nbs[1].replace(regelettre, "");
+                nbs[0] = parseFloat(nbs[0]);
+                nbs[1] = parseFloat(nbs[1]);
+                $("#reply3").val((nbs[0] * nbs[0]) + " - " + (nbs[1] * nbs[1]) + xalt + "^2");
+            }
+            $("input[type=submit]").trigger("click");
+        },
+        "Développer (a+b)² #": function (e) {
+            e.preventDefault();
+            var nbs = $(".mjx-mstyle").text().replace(/(?:\)2|[\(\s=])/g, "").split("+");
+            if (/x/.test(nbs[0])) {
                 var xpos = 0;
-                nbs[0] = nbs[0].replace(/x/g,"");
+                nbs[0] = nbs[0].replace(/x/g, "");
             } else {
                 var xpos = 1;
-                nbs[1] = nbs[1].replace(/x/g,"");
+                nbs[1] = nbs[1].replace(/x/g, "");
             }
             nbs[0] = parseFloat(nbs[0]);
             nbs[1] = parseFloat(nbs[1]);
-            $("#reply8").val((nbs[xpos]*nbs[xpos])+"x^2 + "+(2*nbs[0]*nbs[1])+"x + "+(nbs[Number(!xpos)]*nbs[Number(!xpos)]));
+            $("#reply8").val((nbs[xpos] * nbs[xpos]) + "x^2 + " + (2 * nbs[0] * nbs[1]) + "x + " + (nbs[Number(!xpos)] * nbs[Number(!xpos)]));
             $("input[type=submit]").trigger("click");
-            
+
         },
-        "Expression algébrique d'une fonction 1": function(e){
+        "Expression algébrique d'une fonction 1": function (e) {
             e.preventDefault();
             var consigne = [];
             $(".mjx-char.MJXc-TeX-main-R, .mjx-char.MJXc-TeX-math-I").each(function (i, v) {
                 var current = $(v).text();
-                if (v.parentNode.parentNode.parentNode.className == "mjx-denominator"){
+                if (v.parentNode.parentNode.parentNode.className == "mjx-denominator") {
                     consigne.push("/");
                 }
                 consigne.push(current);
             });
-            consigne = consigne.join("").replace(/−/g,"-");
+            consigne = consigne.join("").replace(/−/g, "-");
             /([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)/.test(consigne);
-            consigne = consigne.replace(/([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)/,arr(parseFloat(RegExp.$1)/parseFloat(RegExp.$2)));
+            consigne = consigne.replace(/([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)/, arr(parseFloat(RegExp.$1) / parseFloat(RegExp.$2)));
             /ff\(([\s\S]+?)\)=([\s\S]+?)ff/.test(consigne);
-            var nbs = [parseFloat(RegExp.$1),RegExp.$2]
+            var nbs = [parseFloat(RegExp.$1), RegExp.$2]
             console.log(nbs);
             var a = arr(nbs[1] / nbs[0]);
-            if (!~[0,1,-1].indexOf(a)) {
-                $("#reply1").val(a+"x");
-            } else if (a==1){
+            if (!~[0, 1, -1].indexOf(a)) {
+                $("#reply1").val(a + "x");
+            } else if (a == 1) {
                 $("#reply1").val("x");
-            } else if (a==-1){
+            } else if (a == -1) {
                 $("#reply1").val("-x");
-            } else{
+            } else {
                 $("#reply1").val("0");
             }
             $("input[type=submit]").trigger("click");
