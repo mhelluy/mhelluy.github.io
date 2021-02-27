@@ -20,6 +20,21 @@ $(function () {
             return a / pgcd + "/" + b / pgcd;
         }
     knownExs = {
+        "Factoriser a²+2ab+b²": function(e){
+            e.preventDefault();
+            var nbs = $(".mjx-mrow").first().text().replace(/\s/g,"").split("+");
+            console.log(nbs);
+            for (var i = 0 ; i < 3 ; i ++){
+                if (/([abcdefghijklmnopqrstuvwxyz])2/.test(nbs[i])){
+                    var xalt = RegExp.$1;
+                    var a = arr(Math.sqrt(parseFloat(nbs[i].replace(xalt+"2",""))));
+                } else if (!/([abcdefghijklmnopqrstuvwxyz])/.test(nbs[i])){
+                    var b = arr(Math.sqrt(parseFloat(nbs[i])));
+                }
+            }
+            $("#reply1").val("("+a+xalt+" + "+b+")^2");
+            $("input[type=submit]").trigger("click");
+        },
         "Développer (a-b)(a+b)#": function (e) {
             e.preventDefault();
             var nbs = $(".mjx-mrow").first().text();
@@ -43,16 +58,19 @@ $(function () {
         "Développer (a+b)² #": function (e) {
             e.preventDefault();
             var nbs = $(".mjx-mstyle").text().replace(/(?:\)2|[\(\s=])/g, "").split("+");
-            if (/x/.test(nbs[0])) {
+            var regelettre = /([abcdefghijklmnopqrstuvwxyz])/g;
+            if (regelettre.test(nbs[0])) {
                 var xpos = 0;
+                var xalt = RegExp.$1;
                 nbs[0] = nbs[0].replace(/x/g, "");
-            } else {
+            } else if (regelettre.test(nbs[1])){
                 var xpos = 1;
+                var xalt = RegExp.$1;
                 nbs[1] = nbs[1].replace(/x/g, "");
             }
             nbs[0] = parseFloat(nbs[0]);
             nbs[1] = parseFloat(nbs[1]);
-            $("#reply8").val((nbs[xpos] * nbs[xpos]) + "x^2 + " + (2 * nbs[0] * nbs[1]) + "x + " + (nbs[Number(!xpos)] * nbs[Number(!xpos)]));
+            $("#reply8").val((nbs[xpos] * nbs[xpos]) + xalt + "^2 + " + (2 * nbs[0] * nbs[1]) + xalt + " + " + (nbs[Number(!xpos)] * nbs[Number(!xpos)]));
             $("input[type=submit]").trigger("click");
 
         },
