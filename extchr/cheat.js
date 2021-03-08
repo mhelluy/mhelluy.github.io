@@ -19,7 +19,7 @@ $(function () {
             var pgcd = mpgcd(a, b);
             return a / pgcd + "/" + b / pgcd;
         },
-        notListedKnown = ["Signe devant une parenthèse niveau 1","Factoriser (1)"];
+        notListedKnown = ["Signe devant une parenthèse niveau 1","Factoriser (1)"],
     knownExs = {
         "Factoriser 1": function(e){
             e.preventDefault();
