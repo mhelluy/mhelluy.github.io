@@ -1,3 +1,7 @@
+var scriptlitt = document.createElement("script");
+scriptlitt.src = "https://mhelluy.github.io/extchr/litteral.js";
+
+document.body.appendChild(scriptlitt);
 $(function () {
     if ($(".oeftitle").get().length > 0) {
         var extitle = $(".oeftitle").html().trim();
