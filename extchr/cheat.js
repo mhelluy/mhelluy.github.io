@@ -1,6 +1,7 @@
 
 $(function () {
     $.getScript("https://mhelluy.github.io/extchr/litteral.js");
+    $.getScript("https://mhelluy.github.io/extchr/polynomial.min.js");
     if ($(".oeftitle").get().length > 0) {
         var extitle = $(".oeftitle").html().trim();
     } else {
@@ -24,6 +25,29 @@ $(function () {
         notListedKnown = ["Signe devant une parenthèse niveau 1", "Factoriser (1)","signe devant une parenthèse niveau 2","signe devant une parenthèse niveau 3"],
         partial = ["Factoriser et développer (2)"],
         knownExs = {
+            "Factoriser a²-b²": function(e){
+                e.preventDefault();
+                var nbs = $(".mjx-mrow").first().text().replace(/[\−\-]/g,"-").replace(/\s/g, "").replace(/([abcdefghijklmnopqrstuvwxyz])2/g,"$1^2");
+                
+                if (/[\−\-]/.test(nbs.charAt(0))){
+                    nbs = polynome(nbs);
+                    if (/\+/.test(nbs)){
+                        nbs = nbs.split(/\+/)[1] + nbs.split(/\+/)[0];
+                    }
+                }
+                nbs = nbs.split(/[\−\-]/);
+                var res = [], temp,
+                    reg = /([abcdefghijklmnopqrstuvwxyz])(?:\^2|²)/g;
+                for (var i = 0 ; i < 2 ; i ++){
+                    temp = "";
+                    if (reg.test(nbs[i])){
+                        temp = RegExp.$1;
+                    }
+                    res.push(arr(Math.sqrt(parseFloat(nbs[i].replace(reg,"")))) + temp);
+                }
+                $("#reply1").val("("+res[0]+"-"+res[1]+")("+res[0]+"+"+res[1]+")");
+                $("input[type=submit]").trigger("click");
+            }, 
             "Correspondance 2": function(e){
                 e.preventDefault();
                 var enonces = [];
@@ -41,15 +65,15 @@ $(function () {
                     }
                 });
                 var colors = ["red", "blue", "purple", "green"];
-                console.log(enonces);
-                console.log(solutions);
+                
+                
                 var valid = true;
                 enonces.forEach(function (v, i, a) {
                     if (choixlettre(v) == "non" || valid == false){
                         valid = false;
                     } else {
                         var soluceID = solutions.indexOf(polynome(v));
-                        console.log(v + ":" + soluceID);
+                        
                         $(".corr_label.corr_left").eq(i+4).css("background-color", colors[i]);
                         $(".corr_label.corr_right").eq(soluceID+4).css("background-color", colors[i]);
                     }
@@ -84,10 +108,10 @@ $(function () {
                     }
                 });
                 var colors = ["red", "blue", "purple", "green"]
-                console.log(solutions);
+                
                 enonces.forEach(function (v, i, a) {
                     var soluceID = solutions.indexOf(polynome(v));
-                    console.log(v + ":" + soluceID);
+                    
                     $(".corr_label.corr_left").eq(i+4).css("background-color", colors[i]);
                     $(".corr_label.corr_right").eq(soluceID+4).css("background-color", colors[i]);
                 });
@@ -142,7 +166,7 @@ $(function () {
                     if (nbs[0] == "") {
                         nbs.shift();
                     }
-                    console.log(nbs);
+                    
                     for (var i = 0; i < 3; i++) {
                         if (/([abcdefghijklmnopqrstuvwxyz])2/.test(nbs[i])) {
                             var xalt = RegExp.$1;
@@ -158,7 +182,7 @@ $(function () {
             "Factoriser a²+2ab+b²": function (e) {
                 e.preventDefault();
                 var nbs = $(".mjx-mrow").first().text().replace(/\s/g, "").split("+");
-                console.log(nbs);
+                
                 for (var i = 0; i < 3; i++) {
                     if (/([abcdefghijklmnopqrstuvwxyz])2/.test(nbs[i])) {
                         var xalt = RegExp.$1;
@@ -224,7 +248,7 @@ $(function () {
                 consigne = consigne.replace(/([0-9]+(?:\.[0-9]+)?)\/([0-9]+(?:\.[0-9]+)?)/, arr(parseFloat(RegExp.$1) / parseFloat(RegExp.$2)));
                 /ff\(([\s\S]+?)\)=([\s\S]+?)ff/.test(consigne);
                 var nbs = [parseFloat(RegExp.$1), RegExp.$2]
-                console.log(nbs);
+                
                 var a = arr(nbs[1] / nbs[0]);
                 if (!~[0, 1, -1].indexOf(a)) {
                     $("#reply1").val(a + "x");
