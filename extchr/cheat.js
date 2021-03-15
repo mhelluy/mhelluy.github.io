@@ -22,8 +22,13 @@ $(function () {
             var pgcd = mpgcd(a, b);
             return a / pgcd + "/" + b / pgcd;
         },
-        notListedKnown = ["Signe devant une parenthèse niveau 1", "Factoriser (1)","signe devant une parenthèse niveau 2","signe devant une parenthèse niveau 3"],
+        notListedKnown = ["Signe devant une parenthèse niveau 1", "Factoriser (1)","signe devant une parenthèse niveau 2","signe devant une parenthèse niveau 3","Developpemet et factorisation (1)","Signe devant une parenthèse niveau 4"],
         partial = ["Factoriser et développer (2)"],
+        correspondances = {
+            "Proportion de proportion 3": "Proportion de proportion 2",
+            "Correspondance 1": "Correspondance 2",
+            "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
+        },
         knownExs = {
             "Factoriser a²-b²": function(e){
                 e.preventDefault();
@@ -665,7 +670,9 @@ $(function () {
                 }
             }
         }
-    knownExs["Proportion de proportion 3"] = knownExs["Proportion de proportion 2"];
+    for (id in correspondances){
+        knownExs[id] = knownExs[correspondances[id]];
+    }
     $(".wims_exo_item").each(function (i, v) {
         var title = $("#" + $(v).attr("id") + " a").html().trim();
         if (~partial.indexOf(title)){
