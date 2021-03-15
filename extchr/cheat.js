@@ -2,6 +2,8 @@
 $(function () {
     $.getScript("https://mhelluy.github.io/extchr/litteral.js");
     $.getScript("https://mhelluy.github.io/extchr/polynomial.min.js");
+    $.getScript("https://mhelluy.github.io/extchr/checkversion.js");
+    //$.getScript("http://localhost/checkver");
     if ($(".oeftitle").get().length > 0) {
         var extitle = $(".oeftitle").html().trim();
     } else {
