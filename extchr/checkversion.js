@@ -1,9 +1,7 @@
 $(function(){
-    var version = "1.0",
+    var version = "1.1",
         changelog = 
-`Ajout d'un changelog pour afficher les modifications de mises à jour.
-Ajout de l'exercice 4 Feuille 12.
-Ajout des exercices 4, 6 et 8 Feuille 13.`;
+`Ajout de l'exercice 1 feuille 15 équation produit`;
 
     if (version != localStorage["chwims_namespace::version"]){
         changelog = "<ul><li> - " + changelog.split(/\n/g).join("</li><li> - ") + "</li></ul>";

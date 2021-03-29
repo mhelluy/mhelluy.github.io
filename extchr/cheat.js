@@ -32,6 +32,18 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Equation produit 1": function(e){
+                e.preventDefault();
+                var enonce = $(".wims_mathml").text().replace(/(?:<math[\S\s]+?<\/math>|[A-Z]\s*=)/g, "").replace(/−/g, "-");
+                enonce = enonce.substring(0, enonce.length / 2).replace(/[abcdefghijklmnopqrstuvwxyz]/g,"x").split(/[\(\)=]/g);
+                var solutions = [];
+                /x=\s([\s\S]+?)\scomme/g.test(solution(enonce[1],"0"));
+                solutions.push(RegExp.$1);
+                /x=\s([\s\S]+?)\scomme/g.test(solution(enonce[3],"0"));
+                solutions.push(RegExp.$1);
+                $("#reply1").val(solutions.join(","));
+                $("input[type=submit]").trigger("click");
+            },
             "Factoriser a²-b²": function(e){
                 e.preventDefault();
                 var nbs = $(".mjx-mrow").first().text().replace(/[\−\-]/g,"-").replace(/\s/g, "").replace(/([abcdefghijklmnopqrstuvwxyz])2/g,"$1^2");
