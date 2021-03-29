@@ -5,7 +5,7 @@ $(function () {
     $.getScript("https://mhelluy.github.io/extchr/checkversion.js");
     //$.getScript("http://localhost/checkver");
     if ($(".oeftitle").get().length > 0) {
-        var extitle = $(".oeftitle").html().trim();
+        var extitle = $(".oeftitle").html().trim().replace(/(?:<[\S\s]+?>|<\/[\S\s]+?>)/g,"");
     } else {
         var extitle = "NONE";
     }
@@ -32,6 +32,23 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Signe d'un binôme ax+b": function(e){
+                e.preventDefault();
+                var fonction = $($("tbody tr").eq(1).get()[0].firstElementChild).text().replace(/(?:<[\S\s]+?>|<\/[\S\s]+?>|\s)/g,"");
+                fonction = fonction.substring(0,fonction.length/3).replace(/[abcdefghijklmnopqrstuvwxyz]/g,"x").replace(/−/g, "-");
+                /x=\s([\s\S]+?)\scomme/g.test(solution(fonction,"0"));
+                var soluce = RegExp.$1;
+                $("#reply1").val(soluce);
+                $("#reply3 option[value='0']").prop("selected",true);
+                if (/-[0-9]*x/g.test(fonction)){
+                    $("#reply2 option[value='+']").prop("selected",true);
+                    $("#reply4 option[value='-']").prop("selected",true);
+                } else {
+                    $("#reply2 option[value='-']").prop("selected",true);
+                    $("#reply4 option[value='+']").prop("selected",true);
+                }
+                $("input[type=submit]").trigger("click");
+            },
             "Equation produit 1": function(e){
                 e.preventDefault();
                 var enonce = $(".wims_mathml").text().replace(/(?:<math[\S\s]+?<\/math>|[A-Z]\s*=)/g, "").replace(/−/g, "-");
