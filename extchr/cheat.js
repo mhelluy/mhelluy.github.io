@@ -705,7 +705,7 @@ $(function () {
         knownExs[id] = knownExs[correspondances[id]];
     }
     $(".wims_exo_item").each(function (i, v) {
-        var title = $("#" + $(v).attr("id") + " a").html().trim();
+        var title = $("#" + $(v).attr("id") + " a").html().trim().replace(/(?:<[\S\s]+?>|<\/[\S\s]+?>)/g,"");
         if (~partial.indexOf(title)){
             $(v).append("<p style='color: #FFAA00;'>cheat : partiel</p>");
         }
