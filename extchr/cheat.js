@@ -24,7 +24,10 @@ $(function () {
             var pgcd = mpgcd(a, b);
             return a / pgcd + "/" + b / pgcd;
         },
-        notListedKnown = ["Factoriser (2)","Signe devant une parenthèse niveau 1", "Factoriser (1)","signe devant une parenthèse niveau 2","signe devant une parenthèse niveau 3","Developpemet et factorisation (1)","Signe devant une parenthèse niveau 4"],
+        fromMathMl = function(expr){
+            return expr.replace(/(?:<(?:math|mstyle|mo|mn)[\S\s]*?>|<\/(?:math|mstyle|mo|mn)>)/g,"").replace(/&#x2212;/g,"-").replace(/<\/mrow><mrow>/g,"/").replace(/(?:<mfrac><mrow>|<\/mrow><\/mfrac>)/g,"");
+        },
+        notListedKnown = ["Equation produit 2","Factoriser (2)","Signe devant une parenthèse niveau 1", "Factoriser (1)","signe devant une parenthèse niveau 2","signe devant une parenthèse niveau 3","Developpemet et factorisation (1)","Signe devant une parenthèse niveau 4"],
         partial = ["Factoriser et développer (2)"],
         correspondances = {
             "Proportion de proportion 3": "Proportion de proportion 2",
@@ -32,6 +35,61 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Solution 2": function(e){
+                e.preventDefault();
+                var enonce = $(".wims_mathml").text().replace(/(?:<math[\S\s]+?<\/math>|[A-Z]\s*=)/g, "").replace(/−/g, "-");
+                enonce = enonce.substring(0, enonce.length / 2).replace(/[abcdefghijklmnopqrstuvwxyz]/g,"x").split(/[\(\)=]/g);
+                let tokeep = [];
+                enonce.forEach(function(v,i){
+                    if (v != ""){
+                        tokeep.push(v);
+                    }
+                });
+                var solutions = [];
+                /x=\s([\s\S]+?)\scomme/g.test(solution(tokeep[0],"0"));
+                solutions.push(RegExp.$1);
+                /x=\s([\s\S]+?)\scomme/g.test(solution(tokeep[1],"0"));
+                solutions.push(RegExp.$1);
+                solutions.sort();
+                var correct;
+                $("label").each(function(i,v){
+                    var local_nbs = []
+                    $("label:eq("+i+") .wims_mathml .mjx-chtml").each(function(i,v){
+                        local_nbs.push(fromMathMl($(v).attr("data-mathml")));
+                    });
+                    local_nbs.sort();
+                    console.log(local_nbs)
+                    console.log(solutions)
+                    if (local_nbs.length == 2 && local_nbs[0] === solutions[0] && local_nbs[1] === solutions[1]){
+                        correct = $(v).attr("for");
+                    }
+                });
+                if (typeof correct != "undefined"){
+                    $("#"+correct).prop("checked",true);
+                } else {
+                    $("#choice1_none").prop("checked",true);
+                }
+                $("input[type=submit]").trigger("click");
+
+            },
+            "Equation produit 3": function(e){
+                e.preventDefault();
+                var enonce = $(".wims_mathml").text().replace(/(?:<math[\S\s]+?<\/math>|[A-Z]\s*=)/g, "").replace(/−/g, "-");
+                enonce = enonce.substring(0, enonce.length / 2).replace(/[abcdefghijklmnopqrstuvwxyz]/g,"x").split(/[\(\)=]/g);
+                let tokeep = [];
+                enonce.forEach(function(v,i){
+                    if (v != ""){
+                        tokeep.push(v);
+                    }
+                });
+                var solutions = [];
+                /x=\s([\s\S]+?)\scomme/g.test(solution(tokeep[0],"0"));
+                solutions.push(RegExp.$1);
+                /x=\s([\s\S]+?)\scomme/g.test(solution(tokeep[1],"0"));
+                solutions.push(RegExp.$1);
+                $("#reply1").val(solutions.join(","));
+                $("input[type=submit]").trigger("click");
+            },
             "Signe d'un binôme ax+b": function(e){
                 e.preventDefault();
                 var fonction = $($("tbody tr").eq(1).get()[0].firstElementChild).text().replace(/(?:<[\S\s]+?>|<\/[\S\s]+?>|\s)/g,"");
