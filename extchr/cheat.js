@@ -25,7 +25,18 @@ $(function () {
             return a / pgcd + "/" + b / pgcd;
         },
         fromMathMl = function(expr){
-            return expr.replace(/(?:<(?:math|mstyle|mo|mn)[\S\s]*?>|<\/(?:math|mstyle|mo|mn)>)/g,"").replace(/&#x2212;/g,"-").replace(/<\/mrow><mrow>/g,"/").replace(/(?:<mfrac><mrow>|<\/mrow><\/mfrac>)/g,"");
+            return expr.replace(/(?:<(?:math|mstyle|mo|mn|mi)[\S\s]*?>|<\/(?:math|mstyle|mo|mn|mi)>)/g,"").replace(/&#x2212;/g,"-").replace(/<\/mrow><mrow>/g,"/").replace(/(?:<mfrac><mrow>|<\/mrow><\/mfrac>)/g,"");
+        },
+        solve = function(expr1,expr2){
+            /x=\s(\S+)\s*(?:et\sx=\s(\S+))?/g.test(solution(expr1,expr2));
+            let solutions = [];
+            if (RegExp.$1 != ""){
+                solutions.push(RegExp.$1);
+            }
+            if (RegExp.$2 != ""){
+                solutions.push(RegExp.$2);
+            }
+            return solutions;
         },
         notListedKnown = ["Equation produit 2","Factoriser (2)","Signe devant une parenthèse niveau 1", "Factoriser (1)","signe devant une parenthèse niveau 2","signe devant une parenthèse niveau 3","Developpemet et factorisation (1)","Signe devant une parenthèse niveau 4"],
         partial = ["Factoriser et développer (2)"],
@@ -35,6 +46,36 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Signe de mx+p 4": function(e){
+                e.preventDefault();
+                let nbs = [eval($(".tab_var tbody tr td").eq(2).text()),eval($(".tab_var tbody tr td").eq(12).text())],
+                    signes1 = eval($(".tab_var tbody tr td .big").first().text()+"1")*eval($(".tab_var tbody tr td .big").eq(2).text()+"1");
+                $(".fill_content").eq(11).html("<span class='big' style='color: purple;'>0</span>");
+                $(".fill_content").eq(13).html("<span class='big' style='color: purple;'>0</span>");
+                if (signes1 == 1){
+                    $(".fill_content").eq(10).html("<span class='big' style='color: purple;'>+</span>");
+                    $(".fill_content").eq(12).html("<span class='big' style='color: purple;'>-</span>");
+                    $(".fill_content").eq(14).html("<span class='big' style='color: purple;'>+</span>");
+                } else {
+                    $(".fill_content").eq(10).html("<span class='big' style='color: purple;'>-</span>");
+                    $(".fill_content").eq(12).html("<span class='big' style='color: purple;'>+</span>");
+                    $(".fill_content").eq(14).html("<span class='big' style='color: purple;'>-</span>");
+                }
+                nbs.sort(function(a,b) {
+                    return (+a) - (+b);
+                  });
+                $("#reply1").val(nbs[0]);
+                $("#reply2").val(nbs[1]);
+                $(".send_answer").before("<p>Déplacez manuellement les étiquettes selon le modèle en violet puis cliquez sur Envoyer pour finir l'exercice</p>");
+                console.log(nbs);
+            },
+            "Equation produit 4": function(e){
+                e.preventDefault();
+                let enonce = fromMathMl($($(".wimscenter").get()[0].firstElementChild.firstElementChild.nextElementSibling).attr("data-mathml")).replace(/[a-z]/g,"x").split(/=/);
+                $("#reply1").val(solve(enonce[0],enonce[1]).join(","));
+                $("input[type=submit]").trigger("click");
+
+            },
             "Solution 2": function(e){
                 e.preventDefault();
                 var enonce = $(".wims_mathml").text().replace(/(?:<math[\S\s]+?<\/math>|[A-Z]\s*=)/g, "").replace(/−/g, "-");
@@ -58,8 +99,6 @@ $(function () {
                         local_nbs.push(fromMathMl($(v).attr("data-mathml")));
                     });
                     local_nbs.sort();
-                    console.log(local_nbs)
-                    console.log(solutions)
                     if (local_nbs.length == 2 && local_nbs[0] === solutions[0] && local_nbs[1] === solutions[1]){
                         correct = $(v).attr("for");
                     }
