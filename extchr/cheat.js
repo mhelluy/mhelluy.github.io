@@ -46,6 +46,74 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Signe d'un produit": function(e){
+                e.preventDefault();
+                let foncForm = fromMathMl($("#MathJax-Element-2-Frame").attr("data-mathml")).split(/=/g)[1].replace(/[a-z]/g,"x").replace(/\)\(/g,"£££").replace(/[\)\(]/g,"").split(/£££/),
+                    formattedNbs = [solve(foncForm[0],"0")[0],solve(foncForm[1],"0")[0]],
+                    nbs = [eval(formattedNbs[0]),eval(formattedNbs[1])];
+                if (nbs[0] < nbs[1]){
+                    $("#reply1").val(formattedNbs[0]);
+                    $("#reply2").val(formattedNbs[1]);
+                    $("#reply4 option[value='0']").prop("selected",true);
+                    $("#reply6 option[value='|']").prop("selected",true);
+                    $("#reply9 option[value='|']").prop("selected",true);
+                    $("#reply11 option[value='0']").prop("selected",true);
+                    if (/\-[0-9]*x/.test(foncForm[0])){
+                        $("#reply3 option[value='+']").prop("selected",true);
+                        $("#reply5 option[value='-']").prop("selected",true);
+                        $("#reply7 option[value='-']").prop("selected",true);
+                    } else {
+                        $("#reply3 option[value='-']").prop("selected",true);
+                        $("#reply5 option[value='+']").prop("selected",true);
+                        $("#reply7 option[value='+']").prop("selected",true);
+                    }
+                    if (/\-[0-9]*x/.test(foncForm[1])){
+                        $("#reply8 option[value='+']").prop("selected",true);
+                        $("#reply10 option[value='+']").prop("selected",true);
+                        $("#reply12 option[value='-']").prop("selected",true);
+                    } else {
+                        $("#reply8 option[value='-']").prop("selected",true);
+                        $("#reply10 option[value='-']").prop("selected",true);
+                        $("#reply12 option[value='+']").prop("selected",true);
+                    }
+                } else {
+                    $("#reply2").val(formattedNbs[0]);
+                    $("#reply1").val(formattedNbs[1]);
+                    $("#reply6 option[value='0']").prop("selected",true);
+                    $("#reply4 option[value='|']").prop("selected",true);
+                    $("#reply11 option[value='|']").prop("selected",true);
+                    $("#reply9 option[value='0']").prop("selected",true);
+                    if (/\-[0-9]*x/.test(foncForm[0])){
+                        $("#reply3 option[value='+']").prop("selected",true);
+                        $("#reply5 option[value='+']").prop("selected",true);
+                        $("#reply7 option[value='-']").prop("selected",true);
+                    } else {
+                        $("#reply3 option[value='-']").prop("selected",true);
+                        $("#reply5 option[value='-']").prop("selected",true);
+                        $("#reply7 option[value='+']").prop("selected",true);
+                    }
+                    if (/\-[0-9]*x/.test(foncForm[1])){
+                        $("#reply8 option[value='+']").prop("selected",true);
+                        $("#reply10 option[value='-']").prop("selected",true);
+                        $("#reply12 option[value='-']").prop("selected",true);
+                    } else {
+                        $("#reply8 option[value='-']").prop("selected",true);
+                        $("#reply10 option[value='+']").prop("selected",true);
+                        $("#reply12 option[value='+']").prop("selected",true);
+                    }
+                }
+                $("#reply14 option[value='0']").prop("selected",true);
+                $("#reply16 option[value='0']").prop("selected",true);
+                let replies = [13,15,17];
+                for (let i = 0 ; i < 3 ; ++i){
+                    if ($("#reply"+(replies[i] - 5) + " option:selected").val() === $("#reply"+(replies[i] - 10) + " option:selected").val()){
+                        $("#reply"+replies[i]+" option[value='+']").prop("selected",true);
+                    } else {
+                        $("#reply"+replies[i]+" option[value='-']").prop("selected",true);
+                    }
+                }
+                $("input[type=submit]").trigger("click");
+            },
             "Signe de mx+p 4": function(e){
                 e.preventDefault();
                 let nbs = [eval($(".tab_var tbody tr td").eq(2).text()),eval($(".tab_var tbody tr td").eq(12).text())],

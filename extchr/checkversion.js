@@ -1,7 +1,7 @@
 $(function(){
-    var version = "1.3",
+    var version = "1.4",
         changelog = 
-`Ajout des exercices 3 et 7 feuille 15 équation produit`;
+`Ajout des exercices 1 et 2 feuille 16 Signe d'un produit`;
 
     if (version != localStorage["chwims_namespace::version"]){
         changelog = "<ul><li> - " + changelog.split(/\n/g).join("</li><li> - ") + "</li></ul>";
