@@ -22,6 +22,9 @@ $(function () {
         },
         fracIr = function (a, b) {
             var pgcd = mpgcd(a, b);
+            if (a === 0){
+                return "0";
+            }
             return a / pgcd + "/" + b / pgcd;
         },
         fromMathMl = function(expr){
@@ -46,6 +49,25 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Loi de probabilité 2": function(e){
+                e.preventDefault();
+                /[0-9][\S\s]*?([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?/.test($(".oefstatement p").first().text());
+                let nbs = [parseInt(RegExp.$1),parseInt(RegExp.$2),parseInt(RegExp.$3),parseInt(RegExp.$4)];
+                $("#reply9").val(nbs[0]);
+                $("#reply7").val(nbs[1]);
+                $("#reply2").val(nbs[2]);
+                $("#reply3").val(nbs[3]);
+                $("#reply1").val(nbs[3]-nbs[2]);
+                $("#reply4").val(nbs[1]-nbs[3]+nbs[2]);
+                $("#reply6").val(nbs[0]-nbs[3]);
+                $("#reply8").val(nbs[0]-nbs[1]);
+                $("#reply5").val(nbs[0]-nbs[1]-nbs[2]);
+                $("#reply10").val(fracIr(nbs[3]-nbs[2],nbs[0]));
+                $("#reply11").val(fracIr(nbs[1]-nbs[3]+nbs[2],nbs[0]));
+                $("#reply12").val(fracIr(nbs[2],nbs[0]));
+                $("#reply13").val(fracIr(nbs[0]-nbs[1]-nbs[2],nbs[0]));
+                $("input[type=submit]").trigger("click");
+            },
             "Signe d'un produit": function(e){
                 e.preventDefault();
                 let foncForm = fromMathMl($("#MathJax-Element-2-Frame").attr("data-mathml")).split(/=/g)[1].replace(/[a-z]/g,"x").replace(/\)\(/g,"£££").replace(/[\)\(]/g,"").split(/£££/),
