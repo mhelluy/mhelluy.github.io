@@ -1,7 +1,7 @@
 $(function(){
-    var version = "1.5",
+    var version = "1.6",
         changelog = 
-`Ajout de l'exercice 2 feuille 17 probas`;
+`Ajout de l'exercice 6 feuille 17 probas`;
 
     if (version != localStorage["chwims_namespace::version"]){
         changelog = "<ul><li> - " + changelog.split(/\n/g).join("</li><li> - ") + "</li></ul>";

@@ -30,6 +30,9 @@ $(function () {
         fromMathMl = function(expr){
             return expr.replace(/(?:<(?:math|mstyle|mo|mn|mi)[\S\s]*?>|<\/(?:math|mstyle|mo|mn|mi)>)/g,"").replace(/&#x2212;/g,"-").replace(/<\/mrow><mrow>/g,"/").replace(/(?:<mfrac><mrow>|<\/mrow><\/mfrac>)/g,"");
         },
+        ensFromMathMl = function(expr){
+            return fromMathMl(expr).replace(/([A-Za-z])&#xAF;<\/mover>/g,"inv$1").replace(/&#x2229;/g,"^").replace(/&#x222A;/g,"u");
+        },
         solve = function(expr1,expr2){
             /x=\s(\S+)\s*(?:et\sx=\s(\S+))?/g.test(solution(expr1,expr2));
             let solutions = [];
@@ -49,6 +52,43 @@ $(function () {
             "Distribuer 4": "Distribuer 3", "Factoriser 2": "Factoriser 1"
         },
         knownExs = {
+            "Union et intersection d'événements 2": function(e){
+                e.preventDefault();
+                /([0-9]+(?:\.[0-9]+)?)[\S\s]*?(?:[0-9]+(?:\.[0-9]+)?)[\S\s]*?(?:[0-9]+(?:\.[0-9]+)?)[\S\s]*?([0-9]+(?:\.[0-9]+)?)[\S\s]*?(?:[0-9]+(?:\.[0-9]+)?)[\S\s]*?(?:[0-9]+(?:\.[0-9]+)?)[\S\s]*?([0-9]+(?:\.[0-9]+)?)[\S\s]*?(?:[0-9]+(?:\.[0-9]+)?)[\S\s]*?(?:[0-9]+(?:\.[0-9]+)?)[\S\s]*?/.test(fromMathMl($(".wimscenter").first().text()));
+                let nbs = [parseFloat(RegExp.$1),parseFloat(RegExp.$2),parseFloat(RegExp.$3)];
+                $(".mjx-chtml.MathJax_CHTML").each(function(i,v){
+                    if (i >= 3){
+                        let ens = ensFromMathMl($(v).attr("data-mathml"));
+                        console.log(ens);
+                        if (ens === "P(AuB)"){
+                            $("#reply"+(i-2)).val(arr(nbs[2]));
+                        } else if (ens === "P(A^B)"){
+                            $("#reply"+(i-2)).val(arr(nbs[0]+nbs[1]-nbs[2]));
+                        } else if (ens === "P(invAuinvB)"){
+                            $("#reply"+(i-2)).val(arr(1-(nbs[0]+nbs[1]-nbs[2])));
+                        } else if (ens === "P(invA^invB)"){
+                            $("#reply"+(i-2)).val(arr(1-nbs[2]));
+                        } else if (ens === "P(A^invB)"){
+                            $("#reply"+(i-2)).val(arr(nbs[2]-nbs[1]));
+                        } else if (ens === "P(invA^B)"){
+                            $("#reply"+(i-2)).val(arr(nbs[2]-nbs[0]));
+                        } else if (ens === "P(invAuB)"){
+                            $("#reply"+(i-2)).val(arr(1-(nbs[2]-nbs[1])));
+                        } else if (ens === "P(AuinvB)"){
+                            $("#reply"+(i-2)).val(arr(1-(nbs[2]-nbs[0])));
+                        } else if (ens === "P(invA)"){
+                            $("#reply"+(i-2)).val(arr(1-nbs[0]));
+                        } else if (ens === "P(invB)"){
+                            $("#reply"+(i-2)).val(arr(1-nbs[1]));
+                        } else if (ens === "P(A)"){
+                            $("#reply"+(i-2)).val(arr(nbs[0]));
+                        } else if (ens === "P(B)"){
+                            $("#reply"+(i-2)).val(arr(nbs[1]));
+                        }
+                    }
+                });
+                $("input[type=submit]").trigger("click");
+            },
             "Loi de probabilité 2": function(e){
                 e.preventDefault();
                 /[0-9][\S\s]*?([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?([0-9]+)[\S\s]*?/.test($(".oefstatement p").first().text());
