@@ -59,7 +59,6 @@ $(function () {
                 $(".mjx-chtml.MathJax_CHTML").each(function(i,v){
                     if (i >= 3){
                         let ens = ensFromMathMl($(v).attr("data-mathml"));
-                        console.log(ens);
                         if (ens === "P(AuB)"){
                             $("#reply"+(i-2)).val(arr(nbs[2]));
                         } else if (ens === "P(A^B)"){
@@ -197,7 +196,7 @@ $(function () {
                 $("#reply1").val(nbs[0]);
                 $("#reply2").val(nbs[1]);
                 $(".send_answer").before("<p>Déplacez manuellement les étiquettes selon le modèle en violet puis cliquez sur Envoyer pour finir l'exercice</p>");
-                console.log(nbs);
+
             },
             "Equation produit 4": function(e){
                 e.preventDefault();
