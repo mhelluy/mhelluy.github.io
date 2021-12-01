@@ -8,6 +8,9 @@ setInterval(function () {
     if ($(".ezcantine").get().length === 0) {
 
         matiere = matieres[Math.floor(Math.random() * matieres.length)];
+        if ($(".collection-absencecours").first().get(0) == $(".collection-listecours").get(0).firstElementChild){
+            $(".collection-absencecours").first().remove();
+        }
         $(".collection-absencecours").first().after(`<li role="listitem" aria-labelledby="id_111" tabindex="0" class="collection-item collection-cours ezcantine">
             <div class="horaire-container"><span>13h00</span><span>13h55</span></div>
             <div class="li-wrapper" style="border-color: ` + matiere[4] + `;">
