@@ -29,5 +29,44 @@ setInterval(function () {
             </div>
         </li>`);
 
+        $(".ezcantine").click(function(e){
+            $("body").append("<ul id='ezcantine_overlay'></ul>");
+            $("#ezcantine_overlay").css({
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: "100%",
+                background: "white",
+                "z-index": 1000
+            });
+            for (let i = 0, c = matieres.length ; i < c ; ++i){
+                $("#ezcantine_overlay").append(
+                `<li style='border: solid black 1px' role="listitem" aria-labelledby="id_111" tabindex="0" class="collection-item collection-cours ezcantine_choice">
+            <div class="horaire-container"><span>13h00</span><span>13h55</span></div>
+            <div class="li-wrapper" style="border-color: ` + matieres[i][4] + `;">
+                <div class="item matiere">` + matieres[i][0] + `</div>
+                <div class="item">` + matieres[i][1] + `</div>
+                <div class="item">` + matieres[i][2] + `</div>
+                <div class="item">` + matieres[i][3] + `</div>
+            </div>
+        </li>`);
+            }
+            $(".ezcantine_choice").each(function(i,v){
+                let matiere = matieres[i];
+                $(v).click(function(e){
+                    $(".ezcantine").html(`<div class="horaire-container"><span>13h00</span><span>13h55</span></div>
+                    <div class="li-wrapper" style="border-color: ` + matiere[4] + `;">
+                        <div class="item matiere">` + matiere[0] + `</div>
+                        <div class="item">` + matiere[1] + `</div>
+                        <div class="item">` + matiere[2] + `</div>
+                        <div class="item">` + matiere[3] + `</div>
+                    </div>`);
+                    $("#ezcantine_overlay").remove();
+                });
+            });
+
+        });
+
     }
 }, 100);
