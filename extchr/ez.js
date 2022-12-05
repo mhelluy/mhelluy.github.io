@@ -29,7 +29,7 @@ setInterval(function () {
 
             $('.flex-contain[aria-description="de 13h05 à 14h00"]').addClass("ezcantine");
             $('.ezcantine .container-cours').removeClass("pas-de-cours");
-            $('.ezcantine .container-cours').removeClass("Gris");
+            $('.ezcantine').removeClass("Gris");
             $('.ezcantine .container-cours').html(`
             <div class="libelle-cours flex-contain">`+matiere[0]+`</div>
             <div>`+matiere[1]+`</div><div></div><div></div><div>`+matiere[2]+`</div>
