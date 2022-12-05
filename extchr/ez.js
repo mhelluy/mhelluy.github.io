@@ -14,20 +14,31 @@ let matieres = [
     
     
 ];
-let matiere = matieres[Math.floor(Math.random() * matieres.length)];
-console.log("test");
+let i;
+if (typeof localStorage["ezcantine_i"] === "undefined") {
+    i = Math.floor(Math.random() * matieres.length);
+} else {
+    i = parseInt(localStorage["ezcantine_i"]);
+}
+if (i >= matieres.length) {
+    i = 0;
+}
+localStorage["ezcantine_i"] = ""+i;
+let matiere = matieres[i];
 setInterval(function () {
     if ($(".ezcantine").get().length === 0) {
         // if ($(".collection-absencecours").first().get(0) == $(".collection-listecours").get(0).firstElementChild){
         //     $(".collection-absencecours").first().remove();
         // }
 
-        let putAll = function(){
+        let putAll = function(setclass){
             $('.flex-contain[aria-description="de 12h00 à 12h55"] .container-cours').html(`<div class="libelle-cours flex-contain">Pas de cours</div>`)
-            $('.flex-contain[aria-description="de 12h00 à 12h55"]').addClass("pas-de-cours");
+            $('.flex-contain[aria-description="de 12h00 à 12h55"] .container-cours').addClass("pas-de-cours");
+            $('.flex-contain[aria-description="de 12h00 à 12h55"]').removeClass("cours-annule");
+            $('.flex-contain[aria-description="de 12h00 à 12h55"]').addClass("Gris");
             $('.flex-contain[aria-description="de 12h00 à 12h55"] .trait-matiere').css("background-color", "#e2e2e2");
 
-            $('.flex-contain[aria-description="de 13h05 à 14h00"]').addClass("ezcantine");
+            if (setclass) $('.flex-contain[aria-description="de 13h05 à 14h00"]').addClass("ezcantine");
             $('.ezcantine .container-cours').removeClass("pas-de-cours");
             $('.ezcantine').removeClass("Gris");
             $('.ezcantine .container-cours').html(`
@@ -36,13 +47,20 @@ setInterval(function () {
             <div>`+matiere[3]+`</div><div></div>
             <div class="flex-contain row-reverse"></div>`);
             $('.ezcantine .trait-matiere').css("background-color", matiere[4]);
-            $('.ezcantine .container-cours').click(function(){
-                matiere = matieres[Math.floor(Math.random() * matieres.length)];
-                putAll();
+
+            if (setclass)
+            $('.ezcantine').click(function(){
+                i += 1;
+                if (i >= matieres.length){
+                    i = 0;
+                }
+                localStorage["ezcantine_i"] = ""+i;
+                matiere = matieres[i];
+                putAll(false);
             });
 
         }
-        putAll();
+        putAll(true);
 
         
 
