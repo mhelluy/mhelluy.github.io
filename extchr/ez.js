@@ -40,6 +40,8 @@ let matiere = matieres[i];
 setInterval(function () {
     if (!mouseUp && new Date().getTime() - lastDate > lockTime){
         $(".ezcantine").css("background-color", (locked ? "#00FF00" : "#FF0000"));
+    } else {
+        $(".ezcantine").css("background-color", "#FFFFFF");
     }
     if ($(".ezcantine").get().length === 0) {
         // if ($(".collection-absencecours").first().get(0) == $(".collection-listecours").get(0).firstElementChild){
@@ -67,9 +69,6 @@ setInterval(function () {
                 if (new Date().getTime() - lastDate > lockTime){
                     locked = !locked;
                     localStorage["ezcantine_locked"] = ""+locked;
-                    setTimeout(function(){
-                        $('.ezcantine').css("background-color", "#FFFFFF");
-                    }, 500);
                 }
 
                 else if (!locked){
