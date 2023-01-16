@@ -14,18 +14,33 @@ let matieres = [
     
     
 ];
-let i;
+
+const lockTime = 3000;
+let i,
+    locked,
+    lastDate,
+    mouseUp;
 if (typeof localStorage["ezcantine_i"] === "undefined") {
     i = Math.floor(Math.random() * matieres.length);
 } else {
     i = parseInt(localStorage["ezcantine_i"]);
 }
+
+if (typeof localStorage["ezcantine_locked"] === "undefined") {
+    locked = false;
+} else {
+    locked = (localStorage["ezcantine_locked"] === "true");
+}
+
 if (i >= matieres.length) {
     i = 0;
 }
 localStorage["ezcantine_i"] = ""+i;
 let matiere = matieres[i];
 setInterval(function () {
+    if (!mouseUp && new Date().getTime() - lastDate > lockTime){
+        $(".ezcantine").css("background-color", (locked ? "#00FF00" : "#FF0000"));
+    }
     if ($(".ezcantine").get().length === 0) {
         // if ($(".collection-absencecours").first().get(0) == $(".collection-listecours").get(0).firstElementChild){
         //     $(".collection-absencecours").first().remove();
@@ -49,18 +64,37 @@ setInterval(function () {
             $('.ezcantine .trait-matiere').css("background-color", matiere[4]);
 
             if (setclass)
-            $('.ezcantine').click(function(){
-                i += 1;
-                if (i >= matieres.length){
-                    i = 0;
+            $('.ezcantine').mouseup(function(){
+                mouseUp = true;
+                if (new Date().getTime() - lastDate > lockTime){
+                    locked = !locked;
+                    localStorage["ezcantine_locked"] = ""+locked;
+                    setTimeout(function(){
+                        $('.ezcantine').css("background-color", "#FFFFFF");
+                    }, 500);
                 }
-                localStorage["ezcantine_i"] = ""+i;
-                matiere = matieres[i];
-                putAll(false);
+
+                else if (!locked){
+                    i += 1;
+                    if (i >= matieres.length){
+                        i = 0;
+                    }
+                    localStorage["ezcantine_i"] = ""+i;
+                    matiere = matieres[i];
+                    putAll(false);
+                }
             });
+
+            $('.ezcantine').mousedown(function(){
+                lastDate = new Date().getTime();
+                mouseUp = false;
+            });
+
+            
 
         }
         putAll(true);
+        
 
         
 
