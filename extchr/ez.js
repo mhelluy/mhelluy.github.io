@@ -62,9 +62,7 @@ setInterval(function () {
             <div>`+matiere[3]+`</div><div></div>
             <div class="flex-contain row-reverse"></div>`);
             $('.ezcantine .trait-matiere').css("background-color", matiere[4]);
-
-            if (setclass)
-            $('.ezcantine').mouseup(function(){
+            let up = function(){
                 mouseUp = true;
                 if (new Date().getTime() - lastDate > lockTime){
                     locked = !locked;
@@ -83,9 +81,18 @@ setInterval(function () {
                     matiere = matieres[i];
                     putAll(false);
                 }
-            });
+            }
+            if (setclass){
+                $('.ezcantine').mouseup(up);
+                $('.ezcantine').on("touchend",up);
+
+            }
 
             $('.ezcantine').mousedown(function(){
+                lastDate = new Date().getTime();
+                mouseUp = false;
+            });
+            $('.ezcantine').on("touchstart",function(){
                 lastDate = new Date().getTime();
                 mouseUp = false;
             });
