@@ -84,7 +84,7 @@ setInterval(function () {
             }
             if (setclass){
                 $('.ezcantine').mouseup(up);
-                $('.ezcantine').on("touchend",up);
+                //$('.ezcantine').on("touchend",up);
 
             }
 
