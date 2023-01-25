@@ -43,11 +43,11 @@ $(function () {
             <label for='choicebt" + this.id + "'>Question à choix</label><input value='choice' type='radio' name='typequest" + this.id + "' id='choicebt" + this.id + "'/>\
             <label for='cashbt" + this.id + "'>Question 'cash'</label><input checked value='cash' type='radio' name='typequest" + this.id + "' id='cashbt" + this.id + "'/><br/>\
         <label for='question" + this.id + "'>Question : </label><input type='text' placeholder='?' id='question" + this.id + "'/><br/>\
-        <label for='compl" + this.id + "'>Informations complémentaires (facultatif) : </label><button id='complimg" + this.id + "'>Image</button><textarea id='compl" + this.id + "'/><br/>\
+        <label for='compl" + this.id + "'>Informations complémentaires (facultatif) : </label><button class='btimg' id='complimg" + this.id + "'>Image</button><textarea id='compl" + this.id + "'/><br/>\
         <label for='exact_answer" + this.id + "'>Réponse exacte : </label><input type='text' id='exact_answer" + this.id + "'/><br/>\
         <label for='answer" + this.id + "'>Réponse acceptée (regex) : </label><input type='text' id='answer" + this.id + "'/><br/>\
-        <label for='expli" + this.id + "'>Explications après réponse (facultatif) : </label><button id='expliimg" + this.id + "'>Image</button><textarea id='expli" + this.id + "'/><br/>\
-        <label for='modact" + this.id + "'>Contenu accessible par le modérateur (facultatif) : </label><button id='modactimg" + this.id + "'>Image</button><textarea id='modact" + this.id + "'/><br/>\
+        <label for='expli" + this.id + "'>Explications après réponse (facultatif) : </label><button class='btimg' id='expliimg" + this.id + "'>Image</button><textarea id='expli" + this.id + "'/><br/>\
+        <label for='modact" + this.id + "'>Contenu accessible par le modérateur (facultatif) : </label><button class='btimg' id='modactimg" + this.id + "'>Image</button><textarea id='modact" + this.id + "'/><br/>\
         <label for='time" + this.id + "'>Temps de réponse : </label><input type='number' value='30' min='5' id='time" + this.id + "'/><br/>\
         <label for='score" + this.id + "'>Score (sans bonus) : </label><input type='number' value='100' min='0' id='score" + this.id + "'/><br/>\
         ");
