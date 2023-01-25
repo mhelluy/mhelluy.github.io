@@ -87,10 +87,10 @@ setInterval(function () {
 
             }
 
-            $('.ezcantine').mousedown(function(){
-                lastDate = new Date().getTime();
-                mouseUp = false;
-            });
+            //$('.ezcantine').mousedown(function(){
+            //    lastDate = new Date().getTime();
+            //    mouseUp = false;
+            //});
             $('.ezcantine').on("touchstart",function(){
                 lastDate = new Date().getTime();
                 mouseUp = false;
