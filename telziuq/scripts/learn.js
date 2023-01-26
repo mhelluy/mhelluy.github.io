@@ -26,6 +26,8 @@ $(function() {
     // on mélange les termes
     terms.sort((a,b)=>Math.random()-0.5);
 
+    $("#progress").attr("max", terms.length*okN);
+
     function preparerTerme(i){
         repondu = false;
         $("#retour").html("");
@@ -74,6 +76,7 @@ $(function() {
         }
         if (sol == currentCorrect) {
             scores[term]++;
+            $("#progress").val(parseInt($("#progress").val()) + 1);
             if (scores[term] >= okN) {
                 terms.splice(terms.indexOf(term), 1);
                 suiv --;
@@ -85,6 +88,7 @@ $(function() {
             }
         } else {
             scores[term] --;
+            $("#progress").val(parseInt($("#progress").val()) - 1);
             if (scores[term] < 0){
                 scores[term] = 0;
             }
