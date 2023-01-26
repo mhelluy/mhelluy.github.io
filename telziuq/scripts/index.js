@@ -5,9 +5,9 @@ $(function () {
     if (lists.length == 0) {
         $("#lists").html("<p>Aucun élément à afficher.</p>");
     } else {
-        $("#lists").html("<ul></ul>");
+        $("#lists").html("<ul id='ull'></ul>");
         for (let i = 0; i < lists.length; i++) {
-            $("#lists ul").append("<li id='list"+ i + "'><a href=\"learn.html?listId=" + i + "\">" + lists[i]["name"] + "</a></li>");
+            $("#ull").append("<li id='list"+ i + "'><a href=\"learn.html?listId=" + i + "\">" + lists[i]["name"] + "</a></li>");
             $("#list" + i).append(`<ul><li><button class='delete' id='delete` + i + `'>Supprimer</button></li><li>
             <button class='export' id='export` + i + `'>Exporter</button></li></ul>`);
         }

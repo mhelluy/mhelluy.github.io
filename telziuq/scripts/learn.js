@@ -7,6 +7,9 @@ $(function() {
     let okN = 4;
 
     let scores = {};
+
+    let repondu = false;
+
     let terms = [];
     let allterms = [];
 
@@ -24,11 +27,13 @@ $(function() {
     terms.sort((a,b)=>Math.random()-0.5);
 
     function preparerTerme(i){
+        repondu = false;
+        $("#retour").html("");
         currentI = i;
         $("#suivant").hide();
         let term = terms[i];
         $("#def").html(term);
-        if (scores[term] > cashN) {
+        if (scores[term] >= cashN) {
             $("#choices").hide();
             $("#cash").show();
             $("#cash_ans").val("");
@@ -37,14 +42,23 @@ $(function() {
             $("#choices").show();
             $("#cash").hide();
             let copy = allterms.slice();
-            copy.sort((a,b)=>Math.random()-0.5);
+            if (copy.length < 4){
+                while (copy.length < 4) {
+                    copy.push(copy[0]);
+                }
+            } else {
+                do {
+                    copy.sort((a,b)=>Math.random()-0.5);
+                } while (~[0,1,2].indexOf(copy.indexOf(term)));
+            }
             let okI = Math.floor(Math.random() * 4);
             copy = copy.slice(0, 3);
             for (let i = 0; i < 4; i++) {
-                if (i == okI) {
-                    $("#choice"+i).val(terms[term]);
+                if (i === okI) {
+                    $("#choice"+i).val(list["terms"][term]);
+                    okI = -1;
                 } else {
-                    $("#choice"+i).val(terms[copy[i-1]]);
+                    $("#choice"+i).val(list["terms"][copy[i-(okI === -1 ? 1 : 0)]]);
                 }
             }
         }
@@ -52,14 +66,15 @@ $(function() {
     }
 
     function correction(sol){
-        suiv = currentI + 1;
+        repondu = true;
+        suiv = (currentI + 1) % terms.length;
         let term = terms[currentI];
         if (suiv >= terms.length) {
             suiv = 0;
         }
         if (sol == currentCorrect) {
             scores[term]++;
-            if (scores[term] > okN) {
+            if (scores[term] >= okN) {
                 terms.splice(terms.indexOf(term), 1);
                 suiv --;
                 if (terms.length == 0) {
@@ -79,17 +94,19 @@ $(function() {
     }
 
     $("#suivant").click(function(e){
-        preparerTerme(terms[suiv]);
+        currentI = (currentI + 1) % terms.length;
+        preparerTerme(currentI);
     });
 
-    $("#choices button").click(function(e){
+    $("#choices input[type=button]").click(function(e){
         e.preventDefault();
-        correction($(this).val().trim());
+        if (!repondu) correction($(this).val().trim());
     });
 
     $("#cash").submit(function(e){
         e.preventDefault();
-        correction($("#cash_ans").val().trim());
+        if (repondu) $("#suivant").trigger("click");
+        else correction($("#cash_ans").val().trim());
     });
 
     preparerTerme(0);
