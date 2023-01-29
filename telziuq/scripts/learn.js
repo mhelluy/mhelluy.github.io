@@ -3,8 +3,11 @@ $(function() {
 
     $("h1").append(list["name"]);
 
-    let cashN = 1;
-    let okN = 4;
+    if (typeof localStorage['telziuq-cashN'] === "undefined") localStorage['telziuq-cashN'] = "1";
+    if (typeof localStorage['telziuq-okN'] === "undefined") localStorage['telziuq-okN'] = "4";
+
+    let cashN = parseInt(localStorage['telziuq-cashN']);
+    let okN = parseInt(localStorage['telziuq-okN']);
 
     let scores = {};
 
@@ -29,6 +32,7 @@ $(function() {
     $("#progress").attr("max", terms.length*okN);
 
     function preparerTerme(i){
+        $("#force_correct").hide();
         repondu = false;
         $("#retour").html("");
         currentI = i;
@@ -57,49 +61,64 @@ $(function() {
             copy = copy.slice(0, 3);
             for (let i = 0; i < 4; i++) {
                 if (i === okI) {
-                    $("#choice"+i).val(list["terms"][term]);
+                    $("#choice"+i).val(list["terms"][term][0]);
                     okI = -1;
                 } else {
-                    $("#choice"+i).val(list["terms"][copy[i-(okI === -1 ? 1 : 0)]]);
+                    $("#choice"+i).val(list["terms"][copy[i-(okI === -1 ? 1 : 0)]][0]);
                 }
             }
         }
         currentCorrect = list["terms"][term];
     }
 
-    function correction(sol){
+    function correction(sol,force){
         repondu = true;
         suiv = (currentI + 1) % terms.length;
         let term = terms[currentI];
         if (suiv >= terms.length) {
             suiv = 0;
         }
-        if (sol == currentCorrect) {
+        if (force || RegExp(currentCorrect[1],currentCorrect[2]).test(sol) || sol === currentCorrect[0]) {
             scores[term]++;
             $("#progress").val(parseInt($("#progress").val()) + 1);
+            if (force && scores[term] > 1){
+                scores[term]++;
+                $("#progress").val(parseInt($("#progress").val()) + 1);
+            }
             if (scores[term] >= okN) {
                 terms.splice(terms.indexOf(term), 1);
                 suiv --;
-                if (terms.length == 0) {
-                    alert("Bravo, vous avez terminé cette liste !");
-                    location.href = "index.html";
-                    return;
-                }
             }
+            $("#retour").html("Bonne réponse : " + currentCorrect[0]);
+            $("#retour").css("color", "green");
         } else {
             scores[term] --;
-            $("#progress").val(parseInt($("#progress").val()) - 1);
             if (scores[term] < 0){
                 scores[term] = 0;
+            } else {
+                $("#progress").val(parseInt($("#progress").val()) - 1);
             }
-            $("#retour").html("Mauvaise réponse, la bonne réponse était : " + currentCorrect);
+            $("#retour").html("Mauvaise réponse, la bonne réponse était : " + currentCorrect[0]);
+            $("#retour").css("color", "red");
+            $("#force_correct").show();
         }
-        $("#suivant").show();
+        
+        if (terms.length == 0) {
+            setTimeout(function(){
+            alert("Bravo, vous avez terminé cette liste !");
+            location.href = "index.html";},100);
+            return;
+        } else $("#suivant").show();
     }
 
     $("#suivant").click(function(e){
         currentI = (currentI + 1) % terms.length;
         preparerTerme(currentI);
+    });
+
+    $("#force_correct").click(function(e){
+        correction("",true);
+        $("#suivant").trigger("click");
     });
 
     $("#choices input[type=button]").click(function(e){

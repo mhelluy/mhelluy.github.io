@@ -1,5 +1,19 @@
 $(function () {
 
+    if (typeof localStorage['telziuq-cashN'] === "undefined") localStorage['telziuq-cashN'] = "1";
+    if (typeof localStorage['telziuq-okN'] === "undefined") localStorage['telziuq-okN'] = "4";
+
+    $("#qcmN").val(localStorage['telziuq-cashN']);
+    $("#cashN").val(parseInt(localStorage['telziuq-okN']) - parseInt(localStorage['telziuq-cashN']));
+
+    $("#qcmN").change(function (e) {
+        localStorage['telziuq-cashN'] = $(this).val() + "";
+    });
+
+    $("#cashN").change(function (e) {
+        localStorage['telziuq-okN'] = "" + (parseInt($(this).val()) + parseInt($("#qcmN").val()));
+    });
+
     let lists = localStorage['telziuq-lists'] ? JSON.parse(localStorage['telziuq-lists']) : [];
 
     if (lists.length == 0) {
@@ -41,6 +55,32 @@ $(function () {
         
     });
 
+    function autoRegex(str){
+        return "^\\s*" + str.replace(/([*+?^=!:${}()|\[\]\/\\])/g, "\\$1")
+                    .replace(/\s*\.\s*/g,"\\s*\\.?\\s*")
+                    .replace(/\s*,\s*/g,"\\s*,?\\s*")
+                  .replace(/\s+/g, "\\s+") + "\\s*$";
+    }
+
+    function adaptList(liste){
+        let terms = liste["terms"];
+        for (let term in terms){
+            if (typeof terms[term].valueOf() === "string"){
+                terms[term] = [terms[term],autoRegex(terms[term]),"i"];
+            } else {
+                if (terms[term].length == 1){
+                    terms[term].push(autoRegex(terms[term][0]));
+                }
+                if (terms[term].length == 2){
+                    terms[term].push("i");
+                }
+            }
+            
+
+        }
+        return liste;
+    }
+
     $("#file").change(function (e) {
         // on récupère le fichier
         let file = $(this)[0].files[0];
@@ -57,7 +97,7 @@ $(function () {
                 // on vérifie le format de la liste
                 if (json["format"] === "telziuq" && json["name"] && json["terms"]) {
                     // on ajoute la liste
-                    lists.push(json);
+                    lists.push(adaptList(json));
                     // on sauvegarde les listes
                     localStorage['telziuq-lists'] = JSON.stringify(lists);
                     // on recharge la page
@@ -68,5 +108,6 @@ $(function () {
             }
         }
     });
+
 
 });
