@@ -1729,14 +1729,14 @@ function Ta(a, b) {
             if (!C) {
                 var G = document.createElement("link");
                 G.rel = "prefetch";
-                G.href = "build/v86.wasm";
+                G.href = "./build/v86.wasm";
                 document.head.appendChild(G)
             } else if (!navigator.userActivation.hasBeenActive){
                 location.search = "";
             }
             G = document.createElement("link");
             G.rel = "prefetch";
-            G.href = "build/xterm.js";
+            G.href = "./build/xterm.js";
             document.head.appendChild(G);
             y.disable_jit && (w.ge = !0);
             y.use_bochs_bios &&
