@@ -837,6 +837,21 @@ function Ta(a, b) {
                 antelink2 = "https://palgania.ovh:8081/",
                 postlink2 = "";
             q = [{
+                    id: "spy_fox_dry_cereals",
+                    G: 33554432,
+                    state: {
+                        url: antelink2 + "spy_fox_dry_cereals.bin" + postlink2
+                    },
+                    H: {
+                        url: antelink + "spy_fox_dry_cereals.img" + postlink,
+                        size: 2147483648,
+                        async: !0,
+                        J: 262144,
+                        fa: !l
+                    },
+                    name: "Spy Fox : Opération Milkshake"
+                },
+                {
                     id: "sampyjam",
                     G: 33554432,
                     state: {
@@ -850,6 +865,21 @@ function Ta(a, b) {
                         fa: !l
                     },
                     name: "Sam Pyjam : Le héros de la nuit"
+                },
+                {
+                    id: "sampyjam2",
+                    G: 33554432,
+                    state: {
+                        url: antelink2 + "sampyjam2.bin" + postlink2
+                    },
+                    H: {
+                        url: antelink + "sampyjam2.img" + postlink,
+                        size: 2147483648,
+                        async: !0,
+                        J: 262144,
+                        fa: !l
+                    },
+                    name: "Sam Pyjam : Héros météo"
                 },
                 {
                     id: "pouce_zoo",
@@ -880,6 +910,36 @@ function Ta(a, b) {
                         fa: !l
                     },
                     name: "Pouce-Pouce voyage dans le temps"
+                },
+                {
+                    id: "pouce_course",
+                    G: 33554432,
+                    state: {
+                        url: antelink2 + "pouce_course.bin" + postlink2
+                    },
+                    H: {
+                        url: antelink + "pouce_course.img" + postlink,
+                        size: 2147483648,
+                        async: !0,
+                        J: 262144,
+                        fa: !l
+                    },
+                    name: "Pouce-Pouce entre dans la course"
+                },
+                {
+                    id: "pouce_cirque",
+                    G: 33554432,
+                    state: {
+                        url: antelink2 + "pouce_cirque.bin" + postlink2
+                    },
+                    H: {
+                        url: antelink + "pouce_cirque.img" + postlink,
+                        size: 2147483648,
+                        async: !0,
+                        J: 262144,
+                        fa: !l
+                    },
+                    name: "Pouce-Pouce découvre le cirque"
                 },
                 {
                     id: "marine1_algues",
