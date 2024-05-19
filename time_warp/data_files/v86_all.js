@@ -888,7 +888,7 @@ function Ta(a, b) {
                         url: antelink2 + "marine1_algues.bin" + postlink2
                     },
                     H: {
-                        url: antelink + "marine1_algues.img.zst" + postlink,
+                        url: antelink + "marine1_algues.img" + postlink,
                         size: 2147483648,
                         async: !1,
                         J: 262144,
