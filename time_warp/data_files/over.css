@@ -1,0 +1,115 @@
+#custom_setup{
+    display: none;
+}
+
+#screen_container_container{
+    margin-top: 5vh;
+    width: 100%;
+}
+
+#opt_container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 10% 10% 10% 10% 10%;
+}
+
+#screen_container{
+    width: 100%;
+    outline: none;
+    border: none;
+    margin: auto;
+    margin-bottom: 5vh;
+}
+
+#screen_container canvas{
+    margin: auto;
+    border: none;
+}
+
+#showmore, #show_custom_setup{
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: center;
+}
+
+#showmore:hover, #show_custom_setup:hover{
+    text-decoration: inherit;
+}
+
+#terminal{
+    display: none;
+}
+.shinfs, #exit{
+    width: 50px;
+    height: auto;
+    margin: auto;
+}
+#fullscreen{
+    display: none;
+}
+.shinfs:hover, #exit:hover{
+    background-color: rgba(128, 128, 128, 0.5);
+    cursor: pointer;
+}
+#phone_rotate{
+    display: none;
+}
+
+#screen_container:fullscreen #fullscreen2{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+}
+#screen_container:fullscreen #show_keyboard{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 0.5;
+}
+#screen_container:fullscreen #run{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+}
+#screen_container:fullscreen #escape2{
+    position: absolute;
+    left: 0;
+    top: 60px;
+    opacity: 0.5;
+}
+
+#screen_container:fullscreen #save_state_d{
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.5;
+}
+#screen_container:fullscreen #load_state_d{
+    position: absolute;
+    right: 0;
+    top: 80px;
+    opacity: 0.5;
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    #phone_rotate{
+        display: none;
+    }
+    #show_keyboard{
+        display: block;
+    }
+  }
+
+@media only screen and (orientation: portrait) {
+    #phone_rotate{
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        background: rgba(128, 128, 128, 1);
+    }
+}

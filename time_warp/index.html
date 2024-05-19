@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!-- saved from url=(0020)../ -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Virtual x86</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="description" content="Run KolibriOS, Linux or Windows 98 in your browser">
+
+    <script src="./data_files/v86_all.js"></script>
+    <link rel="stylesheet" href="./data_files/v86.css">
+    <link rel="stylesheet" href="/data_files/over.css">
+
+    <link rel="prefetch" href="../build/v86.wasm">
+    <link rel="prefetch" href="../build/xterm.js">
+</head>
+
+<body>
+    <div>
+        <h1>Time Warp</h1>
+        <div id="boot_options">
+            <h2>Bayard Presse</h2>
+            <h3>L'Univers de Pomme d'Api</h3>
+            <table id="list_upa">
+                <tr id="start_transforme">
+                    <td><a href="?profile=transforme">Ca se transforme</a></td>
+                    <td>Bayard Presse</td>
+                    <td>Compatibilité : 2.5/5 (Moyenne)</td>
+                </tr>
+                <tr id="start_qqchdedans">
+                    <td><a href="?profile=qqchdedans">Il y a quelque chose dedans</a></td>
+                    <td>Bayard Presse</td>
+                    <td>Compatibilité : 3/5 (Moyenne)</td>
+                </tr>
+                <tr id="start_cafaitpeur">
+                    <td><a href="?profile=cafaitpeur">Ca fait peur</a></td>
+                    <td>Bayard Presse</td>
+                    <td>Compatibilité : 2.5/5 (Moyenne)</td>
+                </tr>
+            </table>
+            <h2>Humongous Inc.</h2>
+            <h3>Marine Malice</h3>
+            <table id="list_marine">
+                <tr id="start_marine1_algues">
+                    <td><a href="?profile=marine1_algues">Marine Malice et le mystère des graines d'algues</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+                <tr id="start_marine2_hantee">
+                    <td><a href="?profile=marine2_hantee">Marine Malice et le mystère de l'école hantée</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+                <tr id="start_marine3_coquillage">
+                    <td><a href="?profile=marine3_coquillage">Marine Malice et le mystère du coquillage volé</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+                <tr id="start_marine4_ranch">
+                    <td><a href="?profile=marine4_ranch">Marine Malice et le mystère du ranch aux cochons</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+                <tr id="start_marine5_lagon">
+                    <td><a href="?profile=marine5_lagon">Marine Malice et le mystère du monstre du lagon bleu</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+            </table>
+            <h3>Pouce-Pouce</h3>
+            <table id="list_pouce">
+                <tr id="start_pouce_zoo">
+                    <td><a href="?profile=pouce_zoo">Pouce-Pouce sauve le zoo</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+                <tr id="start_pouce_temps">
+                    <td><a href="?profile=pouce_temps">Pouce-Pouce voyage dans le temps</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+            </table>
+            <h3>SamPyjam</h3>
+            <table id="list_sampyjam">
+                <tr id="start_sampyjam">
+                    <td><a href="?profile=sampyjam">Sam Pyjam : Le héros de la nuit</a></td>
+                    <td>Humongous Entertainment</td>
+                    <td>Compatibilité : 5/5 (Optimale)</td>
+                </tr>
+            </table>
+            <hr>
+            <div id="show_custom_setup">Fonctionnalités avancées</div>
+            <div id="custom_setup" style="display: none;">
+                <h4>Setup</h4>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td width="350"><label for="cd_image">CD image</label></td>
+                            <td>
+                                <input type="file" id="cd_image">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="floppy_image">Floppy disk image</label></td>
+                            <td> <input type="file" id="floppy_image"><br></td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="hda_image">Hard disk image</label></td>
+                            <td><input type="file" id="hda_image"><br></td>
+                        </tr>
+
+                        <!--
+            <tr>
+                <td><label for="multiboot_image">Multiboot kernel image (experimental)</td>
+                <td><input type="file" id="multiboot_image"><br></td>
+            </tr>
+            -->
+
+                        <tr>
+                            <td><label for="bzimage">Kernel image (bzimage)</label></td>
+                            <td><input type="file" id="bzimage"><br></td>
+                        </tr>
+                        <tr>
+                            <td><label for="initrd">initrd</label></td>
+                            <td><input type="file" id="initrd"><br></td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="2"><small>Disk images are not uploaded to the server</small>
+                                <hr>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="memory_size">Memory size</label></td>
+                            <td>
+                                <input id="memory_size" type="number" value="128" min="16" max="2048" step="16"> MB<br>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="video_memory_size">Video Memory size</label></td>
+                            <td>
+                                <input id="video_memory_size" type="number" value="8" min="1" max="128" step="1"> MB<br>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="networking_proxy">Networking proxy (leave blank to disable)</label></td>
+                            <td>
+                                <input id="networking_proxy" type="text" value="">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="disable_audio">Disable audio</label></td>
+                            <td>
+                                <input id="disable_audio" type="checkbox"><br>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="enable_acpi">Enable ACPI (experimental)</label></td>
+                            <td>
+                                <input id="enable_acpi" type="checkbox"><br>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="boot_order">Boot order</label></td>
+                            <td>
+                                <select id="boot_order">
+                                    <option value="0">Auto</option>
+                                    <option value="213">CD / Floppy / Hard Disk</option>
+                                    <option value="123">CD / Hard Disk / Floppy</option>
+                                    <option value="231">Floppy / CD / Hard Disk</option>
+                                    <option value="321">Floppy / Hard Disk / CD</option>
+                                    <option value="312">Hard Disk / Floppy / CD</option>
+                                    <option value="132">Hard Disk / CD / Floppy</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <button id="start_emulation">Start Emulation</button>
+            </div>
+
+        </div>
+
+        <img src="data_files/exit.png" id="exit" style="display: none;">
+
+        <hr>
+        <pre style="display: none" id="loading"></pre>
+    </div>
+    <div id="screen_container_container" style="display: none;">
+        <div id="opt_container">
+            <img title="Plein écran" class="shinfs" src="data_files/fullscreen.png" alt="Go fullscreen"
+                id="fullscreen2">
+            <img title="Echap" class="shinfs" alt="ESC" id="escape2" src="data_files/esckey.png" />
+            <img id="save_state_d" class="shinfs" src="data_files/save.png" />
+            <img id="load_state_d" class="shinfs" src="data_files/load.png" />
+            <img value="Pause" id="run" class="shinfs" src="data_files/pause.png" alt="Pause/Run" />
+            <img id="show_keyboard" class="shinfs" src="data_files/keyboard_off.png" alt="Show Keyboard">
+        </div>
+
+        <div id="screen_container" style="display: none">
+
+            <img src="data_files/rotate_phone.png" alt="Tournez votre appareil en orientation paysage"
+                id="phone_rotate" />
+            <div id="screen"></div>
+            <canvas id="vga"></canvas>
+            <div style="position: absolute; top: 0; z-index: 10">
+                <textarea class="phone_keyboard"></textarea>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="showmore" style="display: none;">Fonctionnalités avancées</div>
+    <div id="runtime_options" style="display: none">
+        <input type="button" value="Reset" id="reset">
+        <input type="button" value="Send ESC" id="escape">
+        <input type="button" value="Send Ctrl-Alt-Del" id="ctrlaltdel">
+        <input type="button" value="Send Alt-Tab" id="alttab">
+        <input type="button" value="Get floppy image" id="get_fda_image">
+        <input type="button" value="Get second floppy image" id="get_fdb_image">
+        <input type="button" value="Get hard disk image" id="get_hda_image">
+        <input type="button" value="Get second hard disk image" id="get_hdb_image">
+        <input type="button" value="Get CD-ROM image" id="get_cdrom_image">
+        <input type="button" value="Insert floppy image" id="change_fda_image">
+        <input type="button" value="Save State As a File" id="save_state">
+        <input type="button" value="Load State As a File" id="load_state"> <input type="file" style="display: none"
+            id="load_state_input">
+        <input type="button" value="Memory Dump" id="memory_dump">
+        <input type="button" value="Capture network traffic" id="capture_network_traffic"
+            title="In wireshark: file -&gt; import from hex -&gt; tick direction indication, timestamp %s.%f">
+        <input type="button" value="Disable mouse" id="toggle_mouse">
+        <input type="button" value="Lock mouse" id="lock_mouse">
+        <input type="button" value="Go fullscreen" id="fullscreen">
+        <input type="button" value="Take screenshot" id="take_screenshot">
+        <input type="button" value="Mute" id="mute">
+
+        <label>
+            Scale:
+            <input type="number" min="0.25" step="0.25" value="1.0" id="scale" style="width: 50px">
+        </label>
+
+        <br><br>
+    </div>
+
+    <div id="runtime_infos" style="display: none">
+        Running: <span id="running_time">0s</span> <br>
+        Speed: <span id="speed">0</span> mIPS<br>
+        Avg speed: <span id="avg_speed">0</span> mIPS<br>
+        <br>
+        <div id="info_storage" style="display: none">
+            <b>IDE device<span id="ide_type"></span></b><br>
+            Sectors read: <span id="info_storage_sectors_read">0</span><br>
+            Bytes read: <span id="info_storage_bytes_read">0</span><br>
+            Sectors written: <span id="info_storage_sectors_written">0</span><br>
+            Bytes written: <span id="info_storage_bytes_written">0</span><br>
+            Status: <span id="info_storage_status"></span><br>
+            <br>
+        </div>
+        <div id="info_filesystem" style="display: none">
+            <b>9p Filesystem</b><br>
+            Bytes read: <span id="info_filesystem_bytes_read">0</span><br>
+            Bytes written: <span id="info_filesystem_bytes_written">0</span><br>
+            <div style="white-space: nowrap; overflow-x: hidden">Last file: <span id="info_filesystem_last_file"></span>
+            </div>
+            Status: <span id="info_filesystem_status"></span><br>
+            <br>
+        </div>
+        <div id="info_network" style="display: none">
+            <b>Network</b><br>
+            Bytes received: <span id="info_network_bytes_received">0</span><br>
+            Bytes transmitted: <span id="info_network_bytes_transmitted">0</span><br>
+            <br>
+        </div>
+        <b>VGA</b><br>
+        Mode: <span id="info_vga_mode"></span><br>
+        Resolution: <span id="info_res">-</span><br>
+        BPP: <span id="info_bpp">-</span><br>
+        <br>
+        Mouse: <span id="info_mouse_enabled">No</span><br>
+
+        <div id="description" style="display: none"><br></div>
+    </div>
+
+    <div id="filesystem_panel" style="display: none">
+        <label>
+            Send files to emulator<br>
+            <input type="file" id="filesystem_send_file" multiple="">
+        </label>
+        <br><br>
+        <label>
+            Get file from emulator<br>
+            <input type="text" id="filesystem_get_file" placeholder="Absolute path">
+        </label>
+    </div>
+
+    <br style="clear: both"><br>
+
+    <div id="terminal"></div>
+
+    <br style="clear: both">
+    <footer><code>Uses v86 version: <a href="https://github.com/copy/v86/commits/50ba376e">50ba376e</a> (Dec 20, 2023 13:12)</code><br>
+        <a href="">copy/v86 on Github</a><br>
+        <a href="license.txt">LICENSE</a></footer>
+    
+
+    <hr>
+    <!-- <a href="../advent/2023/">Advent of v86</a>
+—
+<a href="../debug.html">Enable debug</a>
+—
+<a href="https://github.com/copy/v86/blob/master/Readme.md">Readme</a>
+—
+<a href="https://github.com/copy/v86">Project on Github</a>
+—
+<a href="https://github.com/copy/v86#compatibility">Compatibility</a> -->
+    <script>
+        localStorage["boot_order"] = "0";
+        localStorage["disable_audio"] = "false";
+        localStorage["enable_acpi"] = "false";
+        localStorage["memory_size"] = "1024";
+        localStorage["networking_proxy"] = "";
+        localStorage["video_memory_size"] = "32";
+        let nproxy = document.getElementById("networking_proxy");
+        setTimeout(() => nproxy.value = "", 200);
+        nproxy.value = "";
+
+        let toggleMouse = document.getElementById("toggle_mouse");
+
+        let c = document.getElementById("show_custom_setup");
+c.addEventListener("click",function() {
+    if (document.getElementById("custom_setup").style.display === "none") {
+        document.getElementById("custom_setup").style.display = "block";
+    } else {
+        document.getElementById("custom_setup").style.display = "none";
+    }
+});
+    </script>
+</body>
+
+</html>
