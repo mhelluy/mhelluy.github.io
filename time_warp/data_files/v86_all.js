@@ -890,7 +890,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "marine1_algues.img" + postlink,
                         size: 2147483648,
-                        async: !1,
+                        async: !0,
                         J: 262144,
                         fa: !1
                     },
