@@ -834,7 +834,7 @@ function Ta(a, b) {
                 q = y.cdn || (l ? "images/" : "//k.copy.sh/");
             let antelink = "https://palgania.ovh:8081/",
                 postlink = "",
-                antelink2 = "games/",
+                antelink2 = "https://palgania.ovh:8081/",
                 postlink2 = "";
             q = [{
                     id: "sampyjam",
