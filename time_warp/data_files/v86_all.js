@@ -1,6 +1,21 @@
 'use strict';
 var p;
 Object.freeze(["shared", "exclusive", "unlock"]);
+let use_async = true;
+// get use_async from local storage or set it if not set
+if (localStorage.getItem("use_async") === null) {
+    localStorage.setItem("use_async", use_async);
+} else {
+    use_async = localStorage.getItem("use_async") === "true";
+}
+window.addEventListener("load",function(){
+    
+        //add event to set use_async according to checkbox (id async)
+        document.getElementById("async").onchange =  function() {
+            use_async = this.checked;
+            localStorage.setItem("use_async", use_async);
+        };
+});
 
 const dbName = "v86_data";
 window.mobileAndTabletCheck = function() {
@@ -768,6 +783,7 @@ function Ta(a, b) {
     function e() {
         function r(A) {
             c("boot_options").style.display = "none";
+            c("basic_options").style.display = "none";
             b(A.name);
             w.filesystem = A.filesystem;
             A.state && (c("reset").style.display = "none",
@@ -837,6 +853,21 @@ function Ta(a, b) {
                 antelink2 = "https://palgania.ovh:8081/",
                 postlink2 = "";
             q = [{
+                    id: "monsieur_heureux_et_le_monde_a_lenvers",
+                    G: 33554432,
+                    state: {
+                        url: antelink2 + "monsieur_heureux_et_le_monde_a_lenvers.bin" + postlink2
+                    },
+                    H: {
+                        url: antelink + "monsieur_heureux_et_le_monde_a_lenvers.img" + postlink,
+                        size: 2147483648,
+                        async: use_async,
+                        J: 262144,
+                        fa: !l
+                    },
+                    name: "Monsieur Heureux et le monde à l'envers"
+                },
+                {
                     id: "spy_fox_dry_cereals",
                     G: 33554432,
                     state: {
@@ -845,7 +876,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "spy_fox_dry_cereals.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -860,7 +891,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "sampyjam.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -875,7 +906,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "sampyjam2.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -890,7 +921,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "pouce_zoo.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -905,7 +936,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "pouce_temps.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -920,7 +951,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "pouce_course.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -935,7 +966,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "pouce_cirque.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -950,7 +981,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "marine1_algues.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !1
                     },
@@ -965,7 +996,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "marine2_hantee.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -980,7 +1011,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "marine3_coquillage.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -995,7 +1026,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "marine4_ranch.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1010,7 +1041,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "marine5_lagon.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1025,7 +1056,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "transforme.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1040,7 +1071,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "qqchdedans.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1055,7 +1086,7 @@ function Ta(a, b) {
                     H: {
                         url: antelink + "cafaitpeur.img" + postlink,
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1094,7 +1125,7 @@ function Ta(a, b) {
                     X: {
                         url: q + "skiffos.iso",
                         size: 124672E3,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1105,7 +1136,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "serenity-v3/.img.zst",
                         size: 734003200,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !0
                     },
@@ -1121,7 +1152,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "serenity-v3/.img.zst",
                         size: 734003200,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !0
                     },
@@ -1133,7 +1164,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "redox_demo_i686_2022-11-26_643_harddrive.img",
                         size: 536870912,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1149,7 +1180,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "redox_demo_i686_2022-11-26_643_harddrive.img",
                         size: 536870912,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1172,7 +1203,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "FiwixOS-3.3-i386.img",
                         size: 1073741824,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1184,7 +1215,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "haiku-v3.img",
                         size: 1073741824,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1199,7 +1230,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "haiku-v3.img",
                         size: 1073741824,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1226,7 +1257,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "freegem.bin",
                         size: 209715200,
-                        async: !0
+                        async: use_async
                     },
                     name: "Freedos with FreeGEM"
                 }, {
@@ -1234,7 +1265,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "psychdos.img",
                         size: 549453824,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1343,7 +1374,7 @@ function Ta(a, b) {
                     X: {
                         url: q + "minix-3.3.0.iso",
                         size: 605581312,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1378,7 +1409,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "openbsd.img",
                         size: 1073741824,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1392,7 +1423,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "openbsd.img",
                         size: 1073741824,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1403,7 +1434,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "netbsd.img",
                         size: 511000064,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1479,7 +1510,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "windows2k.img",
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1494,7 +1525,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "windows2k.img",
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1506,7 +1537,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "winnt4_noacpi.img",
                         size: 523837440,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1518,7 +1549,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "winnt31.img",
                         size: 91226112,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1529,7 +1560,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "windows98.img",
                         size: 314572800,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1544,7 +1575,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "windows98.img",
                         size: 314572800,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1556,7 +1587,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "w95.img",
                         size: 242049024,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1570,7 +1601,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "w95.img",
                         size: 242049024,
-                        async: !0,
+                        async: use_async,
                         J: 262144,
                         fa: !l
                     },
@@ -1598,7 +1629,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "freebsd.img",
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1612,7 +1643,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "freebsd.img",
                         size: 2147483648,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1623,7 +1654,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "reactos-livecd-0.4.15-dev-73-g03c09c9-x86-gcc-lin-dbg.iso",
                         size: 250609664,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1635,7 +1666,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "reactos.img",
                         size: 524288E3,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1651,7 +1682,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "reactos.img",
                         size: 524288E3,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1698,7 +1729,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "9front-8963.f84cf1e60427675514fb056cc1723e45da01e043.386.iso",
                         size: 477452288,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1714,7 +1745,7 @@ function Ta(a, b) {
                     H: {
                         url: q + "9front-8963.f84cf1e60427675514fb056cc1723e45da01e043.386.iso",
                         size: 477452288,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1735,7 +1766,7 @@ function Ta(a, b) {
                     X: {
                         url: q + "android-x86-1.6-r2.iso",
                         size: 54661120,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1746,7 +1777,7 @@ function Ta(a, b) {
                     X: {
                         url: q + "android_x86_nonsse3_4.4r1_20140904.iso",
                         size: 247463936,
-                        async: !0,
+                        async: use_async,
                         J: 1048576,
                         fa: !l
                     },
@@ -1776,7 +1807,7 @@ function Ta(a, b) {
                     G: 536870912,
                     H: {
                         url: q + "syllable-destop-0.6.7/.img",
-                        async: !0,
+                        async: use_async,
                         size: 524288E3,
                         J: 524288,
                         fa: !0
@@ -1826,12 +1857,12 @@ function Ta(a, b) {
                 if (y["hda.url"] && (w.H = {
                         size: parseInt(y["hda.size"], 10) || void 0,
                         url: y["hda.url"],
-                        async: !0
+                        async: use_async
                     }), y["cdrom.url"] && (w.X = {
                         size: parseInt(y["cdrom.size"], 10) ||
                             void 0,
                         url: y["cdrom.url"],
-                        async: !0
+                        async: use_async
                     }), y["fda.url"] && (w.$ = {
                         size: parseInt(y["fda.size"], 10) || void 0,
                         url: y["fda.url"],
@@ -2011,6 +2042,7 @@ function Ta(a, b) {
             } : window.onbeforeunload = null
         }
         c("boot_options").style.display = "none";
+        c("basic_options").style.display = "none";
         c("loading").style.display = "none";
         c("exit").style.display = "block";
         c("showmore").style.display = "block";
@@ -2021,6 +2053,7 @@ function Ta(a, b) {
         r.filesystem ? f(m) : K(m, "9p-attach", function() {
             f(m)
         });
+        
         c("showmore").onclick = function() {
             if (c("runtime_options").style.display === "none") {
                 c("runtime_options").style.display = "block";
