@@ -856,14 +856,14 @@ function Ta(a, b) {
                     id: "monsieur_heureux_et_le_monde_a_lenvers",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "monsieur_heureux_et_le_monde_a_lenvers.bin" + postlink2
+                        url: antelink2 + "monsieur_heureux_et_le_monde_a_lenvers.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "monsieur_heureux_et_le_monde_a_lenvers.img" + postlink,
+                        url: antelink + "monsieur_heureux_et_le_monde_a_lenvers/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Monsieur Heureux et le monde à l'envers"
                 },
@@ -871,14 +871,14 @@ function Ta(a, b) {
                     id: "spy_fox_dry_cereals",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "spy_fox_dry_cereals.bin" + postlink2
+                        url: antelink2 + "spy_fox_dry_cereals.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "spy_fox_dry_cereals.img" + postlink,
+                        url: antelink + "spy_fox_dry_cereals/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Spy Fox : Opération Milkshake"
                 },
@@ -886,14 +886,14 @@ function Ta(a, b) {
                     id: "sampyjam",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "sampyjam.bin" + postlink2
+                        url: antelink2 + "sampyjam.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "sampyjam.img" + postlink,
+                        url: antelink + "sampyjam/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Sam Pyjam : Le héros de la nuit"
                 },
@@ -901,14 +901,14 @@ function Ta(a, b) {
                     id: "sampyjam2",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "sampyjam2.bin" + postlink2
+                        url: antelink2 + "sampyjam2.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "sampyjam2.img" + postlink,
+                        url: antelink + "sampyjam2/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Sam Pyjam : Héros météo"
                 },
@@ -916,14 +916,14 @@ function Ta(a, b) {
                     id: "pouce_zoo",
                     G: 1073741824,
                     state: {
-                        url: antelink2 + "pouce_zoo.bin" + postlink2
+                        url: antelink2 + "pouce_zoo.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "pouce_zoo.img" + postlink,
+                        url: antelink + "pouce_zoo/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Pouce-Pouce sauve le zoo"
                 },
@@ -931,14 +931,14 @@ function Ta(a, b) {
                     id: "pouce_temps",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "pouce_temps.bin" + postlink2
+                        url: antelink2 + "pouce_temps.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "pouce_temps.img" + postlink,
+                        url: antelink + "pouce_temps/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Pouce-Pouce voyage dans le temps"
                 },
@@ -946,14 +946,14 @@ function Ta(a, b) {
                     id: "pouce_course",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "pouce_course.bin" + postlink2
+                        url: antelink2 + "pouce_course.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "pouce_course.img" + postlink,
+                        url: antelink + "pouce_course/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Pouce-Pouce entre dans la course"
                 },
@@ -961,14 +961,14 @@ function Ta(a, b) {
                     id: "pouce_cirque",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "pouce_cirque.bin" + postlink2
+                        url: antelink2 + "pouce_cirque.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "pouce_cirque.img" + postlink,
+                        url: antelink + "pouce_cirque/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Pouce-Pouce découvre le cirque"
                 },
@@ -976,14 +976,14 @@ function Ta(a, b) {
                     id: "marine1_algues",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "marine1_algues.bin" + postlink2
+                        url: antelink2 + "marine1_algues.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "marine1_algues.img" + postlink,
+                        url: antelink + "marine1_algues/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !1
+                        fa: !0
                     },
                     name: "Marine Malice et le mystère des graines d'algues"
                 },
@@ -991,14 +991,14 @@ function Ta(a, b) {
                     id: "marine2_hantee",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "marine2_hantee.bin" + postlink2
+                        url: antelink2 + "marine2_hantee.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "marine2_hantee.img" + postlink,
+                        url: antelink + "marine2_hantee/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Marine Malice et le mystère de l'école hantée"
                 },
@@ -1006,14 +1006,14 @@ function Ta(a, b) {
                     id: "marine3_coquillage",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "marine3_coquillage.bin" + postlink2
+                        url: antelink2 + "marine3_coquillage.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "marine3_coquillage.img" + postlink,
+                        url: antelink + "marine3_coquillage/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Marine Malice et le mystère du coquillage volé"
                 },
@@ -1021,14 +1021,14 @@ function Ta(a, b) {
                     id: "marine4_ranch",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "marine4_ranch.bin" + postlink2
+                        url: antelink2 + "marine4_ranch.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "marine4_ranch.img" + postlink,
+                        url: antelink + "marine4_ranch/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Marine Malice et le mystère du ranch aux cochons"
                 },
@@ -1036,14 +1036,14 @@ function Ta(a, b) {
                     id: "marine5_lagon",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "marine5_lagon.bin" + postlink2
+                        url: antelink2 + "marine5_lagon.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "marine5_lagon.img" + postlink,
+                        url: antelink + "marine5_lagon/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Marine Malice et le mystère du monstre du lagon bleu"
                 },
@@ -1051,14 +1051,14 @@ function Ta(a, b) {
                     id: "transforme",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "transforme.bin" + postlink2
+                        url: antelink2 + "transforme.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "transforme.img" + postlink,
+                        url: antelink + "transforme/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Ca se transforme"
                 },
@@ -1066,14 +1066,14 @@ function Ta(a, b) {
                     id: "qqchdedans",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "qqchdedans.bin" + postlink2
+                        url: antelink2 + "qqchdedans.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "qqchdedans.img" + postlink,
+                        url: antelink + "qqchdedans/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Il y a quelque chose dedans"
                 },
@@ -1081,14 +1081,14 @@ function Ta(a, b) {
                     id: "cafaitpeur",
                     G: 33554432,
                     state: {
-                        url: antelink2 + "cafaitpeur.bin" + postlink2
+                        url: antelink2 + "cafaitpeur.bin.zst" + postlink2
                     },
                     H: {
-                        url: antelink + "cafaitpeur.img" + postlink,
+                        url: antelink + "cafaitpeur/.img.zst" + postlink,
                         size: 2147483648,
                         async: use_async,
                         J: 262144,
-                        fa: !l
+                        fa: !0
                     },
                     name: "Ca fait peur"
                 },
