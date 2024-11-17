@@ -1,0 +1,23 @@
+@font-face {
+    font-family: BBBBaskervvol-Fondue;
+    src: url(BBBBaskervvol-Fondue.woff);
+}
+
+@font-face {
+    font-family: squares;
+    src: url(custom_unicode_font.ttf);
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td, th{
+    border: solid black 1px;
+    padding: 10px;
+    font-family: "Cambria Math";
+}
+
+.bbb{
+    font-family: BBBBaskervvol-Fondue, squares;
+}
