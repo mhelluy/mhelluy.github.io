@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Creator</title>
+    <script src="https://cdn.jsdelivr.net/npm/jszip"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .choices-container {
+            margin-left: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Creator</h1>
+    <div id="questions-container"></div>
+    <button onclick="addQuestion()">Add Question</button>
+    <button onclick="generateQuiz()">Generate Quiz</button>
+
+    <script>
+        let questions = [];
+
+        function addQuestion() {
+            const questionIndex = questions.length;
+            questions.push({ type: 'text', choices: [], answers: [], explanation: '', media: '', modact: '' });
+
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.id = `question-${questionIndex}`;
+
+            questionDiv.innerHTML = `
+                <label>Question Type: 
+                    <input type="radio" name="type-${questionIndex}" value="text" checked onclick="updateQuestionType(${questionIndex}, 'text')"> Text
+                    <input type="radio" name="type-${questionIndex}" value="choice" onclick="updateQuestionType(${questionIndex}, 'choice')"> Choice
+                </label><br>
+                <label>Question: <input type="text" onchange="updateQuestion(${questionIndex}, 'question', this.value)"></label><br>
+                <label>Time (seconds): <input type="number" onchange="updateQuestion(${questionIndex}, 'time', this.value)"></label><br>
+                <label>Score: <input type="number" onchange="updateQuestion(${questionIndex}, 'score', this.value)"></label><br>
+                <label>Explanation: <textarea id="explanation-${questionIndex}" onchange="updateQuestion(${questionIndex}, 'explanation', this.value)"></textarea></label><button onclick="addMediaInput(${questionIndex}, 'explanation')">Add Media</button><br>
+                <label>Complementary Content: <textarea id="media-${questionIndex}" onchange="updateQuestion(${questionIndex}, 'media', this.value)"></textarea></label><button onclick="addMediaInput(${questionIndex}, 'media')">Add Media</button><br>
+                <label>Moderator Action: <textarea id="modact-${questionIndex}" onchange="updateQuestion(${questionIndex}, 'modact', this.value)"></textarea></label><button onclick="addMediaInput(${questionIndex}, 'modact')">Add Media</button><br>
+                <div id="text-options-${questionIndex}" style="display: block;">
+                    <label>Exact Answer: <input type="text" id="exact-answer-${questionIndex}" onchange="updateExactAnswer(${questionIndex}, this.value)"></label><br>
+                    <label>Regex: <input type="text" id="regex-${questionIndex}" onchange="updateRegex(${questionIndex}, this.value)"></label><br>
+                </div>
+                <div class="choices-container" id="choices-${questionIndex}" style="display: none;">
+                    <button onclick="addChoice(${questionIndex})">Add Choice</button>
+                </div>
+            `;
+
+            document.getElementById('questions-container').appendChild(questionDiv);
+        }
+
+        function updateQuestionType(questionIndex, type) {
+            questions[questionIndex].type = type;
+            const textOptions = document.getElementById(`text-options-${questionIndex}`);
+            const choicesContainer = document.getElementById(`choices-${questionIndex}`);
+            if (type === 'choice') {
+                textOptions.style.display = 'none';
+                choicesContainer.style.display = 'block';
+            } else {
+                textOptions.style.display = 'block';
+                choicesContainer.style.display = 'none';
+                questions[questionIndex].choices = [];
+                questions[questionIndex].answers = [];
+            }
+        }
+
+        function addChoice(questionIndex) {
+            const choiceIndex = questions[questionIndex].choices.length;
+            questions[questionIndex].choices.push("");
+
+            const choicesContainer = document.getElementById(`choices-${questionIndex}`);
+            const choiceDiv = document.createElement('div');
+            choiceDiv.innerHTML = `
+                <label>Choice: <input type="text" onchange="updateChoice(${questionIndex}, ${choiceIndex}, this.value)"></label>
+                <label>Correct: <input type="checkbox" onchange="toggleAnswer(${questionIndex}, ${choiceIndex}, this.checked)"></label>
+            `;
+            choicesContainer.insertBefore(choiceDiv, choicesContainer.lastElementChild);
+        }
+
+        function updateQuestion(index, key, value) {
+            questions[index][key] = value;
+        }
+
+        function updateChoice(questionIndex, choiceIndex, value) {
+            questions[questionIndex].choices[choiceIndex] = value;
+        }
+
+        function toggleAnswer(questionIndex, choiceIndex, isChecked) {
+            const answers = questions[questionIndex].answers;
+            if (isChecked) {
+                if (!answers.includes(choiceIndex)) {
+                    answers.push(choiceIndex);
+                }
+            } else {
+                const answerIndex = answers.indexOf(choiceIndex);
+                if (answerIndex > -1) {
+                    answers.splice(answerIndex, 1);
+                }
+            }
+        }
+
+        function updateExactAnswer(questionIndex, value) {
+            questions[questionIndex].exactAnswer = value;
+            generateRegex(questionIndex, value);
+        }
+
+        function updateRegex(questionIndex, value) {
+            questions[questionIndex].regex = value;
+        }
+
+        function generateRegex(questionIndex, exactAnswer) {
+            const regexInput = document.getElementById(`regex-${questionIndex}`);
+            const sanitizedAnswer = exactAnswer.trim().replace(/\s+/g, '\\s+');
+            const regex = `^${sanitizedAnswer}$`;
+            regexInput.value = regex;
+            updateRegex(questionIndex, regex);
+        }
+
+        function addMediaInput(questionIndex, field) {
+            const mediaInputContainer = document.createElement('div');
+            mediaInputContainer.innerHTML = `
+                <label>Upload Media for ${field}: <input type="file" onchange="handleMediaUpload(${questionIndex}, '${field}', this)"></label>
+                <label>or URL: <input type="text" onchange="handleMediaURL(${questionIndex}, '${field}', this.value)"></label>
+            `;
+            document.getElementById(`question-${questionIndex}`).appendChild(mediaInputContainer);
+        }
+
+        function handleMediaUpload(questionIndex, field, input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const contentType = file.type.startsWith('image') ? 'img' : 'audio';
+                    const mediaTag = contentType === 'img' ? `<img src="${e.target.result}" alt="${file.name}">` : `<audio controls src="${e.target.result}"></audio>`;
+                    // Cibler le bon textarea pour insérer la balise HTML
+                    const textarea = document.getElementById(`${field}-${questionIndex}`);
+                    textarea.value += `\n${mediaTag}`;  // Ajout de la balise dans le textarea
+                    questions[questionIndex][field] = mediaTag;  // Mise à jour du dictionnaire
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleMediaURL(questionIndex, field, url) {
+            const contentType = url.match(/\.(jpeg|jpg|gif|png)$/i) ? 'img' : 'audio';
+            const mediaTag = contentType === 'img' ? `<img src="${url}" alt="Media">` : `<audio controls src="${url}"></audio>`;
+            // Cibler le bon textarea pour insérer la balise HTML
+            const textarea = document.getElementById(`${field}-${questionIndex}`);
+            textarea.value += `\n${mediaTag}`;  // Ajout de la balise dans le textarea
+            questions[questionIndex][field] = mediaTag;  // Mise à jour du dictionnaire
+        }
+
+        function generateQuiz() {
+            const zip = new JSZip();
+            const jsonContent = JSON.stringify(questions, null, 2);
+            zip.file("quiz.json", jsonContent);
+
+            questions.forEach((question, index) => {
+                if (question.mediaFiles) {
+                    question.mediaFiles.forEach(file => {
+                        const base64Data = file.content.split(",")[1];
+                        zip.file(`media/question-${index}-${file.name}`, base64Data, { base64: true });
+                    });
+                }
+            });
+
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                saveAs(content, "quiz.zip");
+            });
+        }
+    </script>
+</body>
+</html>
