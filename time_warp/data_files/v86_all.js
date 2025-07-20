@@ -848,9 +848,9 @@ function Ta(a, b) {
             };
             var y = a(),
                 q = y.cdn || (l ? "images/" : "//k.copy.sh/");
-            let antelink = "https://palgania.ovh:8081/",
+            let antelink = "https://palgania.ovh:8081/games/",
                 postlink = "",
-                antelink2 = "https://palgania.ovh:8081/",
+                antelink2 = "https://palgania.ovh:8081/games/",
                 postlink2 = "";
             q = [
                 {
