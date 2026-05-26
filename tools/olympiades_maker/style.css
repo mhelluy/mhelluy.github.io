@@ -1,0 +1,147 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #16213e;
+}
+
+h2 {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Config ── */
+.config {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  margin-bottom: 1.5rem;
+}
+
+.inputs-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.inputs-row label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 120px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+  gap: 0.35rem;
+}
+
+.inputs-row input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.inputs-row input:focus {
+  outline: none;
+  border-color: #3b5998;
+}
+
+.info {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.82rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+#generate-btn {
+  display: block;
+  width: 100%;
+  padding: 0.7rem;
+  background: #3b5998;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#generate-btn:hover { background: #2d4373; }
+#generate-btn:disabled { background: #99a; cursor: not-allowed; }
+
+#message {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+
+#message.error { color: #c0392b; }
+#message.success { color: #27ae60; }
+#message.info { color: #2980b9; }
+
+/* ── Results ── */
+.results {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 0.5rem;
+}
+
+#schedule-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+#schedule-table th,
+#schedule-table td {
+  border: 1px solid #d0d5dd;
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#schedule-table th {
+  background: #3b5998;
+  color: #fff;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+#schedule-table td:first-child {
+  background: #3b5998;
+  color: #fff;
+  font-weight: 700;
+  min-width: 50px;
+}
+
+#schedule-table tbody tr:nth-child(even) td:not(:first-child) { background: #f4f6fb; }
+#schedule-table tbody tr:nth-child(odd)  td:not(:first-child) { background: #fff; }
+
+.duel { display: block; line-height: 1.5; }

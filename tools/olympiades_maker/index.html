@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Générateur d'Olympiades</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Générateur d'Olympiades</h1>
+
+    <section class="config">
+      <h2>Configuration</h2>
+      <div class="inputs-row">
+        <label>
+          Activités
+          <input type="number" id="activities" min="2" max="20" value="6">
+        </label>
+        <label>
+          Duels par case
+          <input type="number" id="duels" min="1" max="10" value="2">
+        </label>
+        <label>
+          Participants
+          <input type="number" id="participants" min="4" max="200" value="24">
+        </label>
+      </div>
+      <div class="info">
+        <span id="rotations-info">Rotations : 6</span>
+        <span id="per-activity-info">Participants par activité : 4</span>
+      </div>
+      <button id="generate-btn">Générer le planning</button>
+      <div id="message"></div>
+    </section>
+
+    <section class="results" id="results" hidden>
+      <h2>Planning</h2>
+      <div class="table-wrapper">
+        <table id="schedule-table"></table>
+      </div>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
