@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaajistan — Wikipédia</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+            color: #202122;
+        }
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+        }
+        .header-logo {
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .sidebar {
+            width: 160px;
+            padding: 20px;
+            font-size: 0.85em;
+            color: #54595d;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 5px;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #0645ad;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            background-color: #ffffff;
+            border: 1px solid #a2a9b1;
+            border-top: none;
+            padding: 30px 40px;
+            flex: 1;
+        }
+        h1 {
+            font-family: 'Linux Libertine', 'Georgia', Times, serif;
+            font-size: 2em;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        h2 {
+            font-family: 'Linux Libertine', 'Georgia', Times, serif;
+            font-size: 1.5em;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .infobox {
+            float: right;
+            width: 300px;
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        .infobox th {
+            background-color: #e2e2e2;
+            text-align: left;
+            padding: 5px;
+            vertical-align: top;
+        }
+        .infobox td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        .infobox .title {
+            background-color: #b0c4de;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .flag-container {
+            text-align: center;
+            margin-bottom: 15px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .flag {
+            width: 150px;
+            height: 100px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff00ff,
+                #ff00ff 10px,
+                #00ff00 10px,
+                #00ff00 20px
+            );
+            margin: 0 auto;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .toc {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            display: inline-block;
+            padding: 15px 25px 15px 15px;
+            margin: 20px 0;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .toc ul ul {
+            padding-left: 20px;
+        }
+        .toc li {
+            margin-bottom: 5px;
+        }
+        .quote {
+            background-color: #f9f9f9;
+            border-left: 4px solid #c8ccd1;
+            margin: 20px 0;
+            padding: 10px 20px;
+            font-style: italic;
+        }
+        ul.content-list {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        ul.content-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logo">WIKIPÉDIA<br><span style="font-size: 0.5em; font-weight: normal; font-family: sans-serif;">L'encyclopédie libre (et absurde)</span></div>
+        <div style="flex:1;"></div>
+        <input type="text" placeholder="Rechercher sur Wikipédia" style="padding: 5px; width: 250px;">
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Portails thématiques</a></li>
+                <li><a href="#">Article au hasard</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <h4 style="margin-top: 20px;">Contribuer</h4>
+            <ul>
+                <li><a href="#">Débuter sur Wikipédia</a></li>
+                <li><a href="#">Aide</a></li>
+                <li><a href="#">Faire un don</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Jaajistan</h1>
+            
+            <div class="infobox">
+                <div class="title">République Démocratique du Jaajistan</div>
+                
+                <div class="flag-container">
+                    <div class="flag">JAAJ</div>
+                    <div style="font-size: 0.8em; margin-top: 5px;">Drapeau du Jaajistan</div>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <th style="width: 40%;">Capitale</th>
+                        <td>Saint-Jaaj-des-Fossés</td>
+                    </tr>
+                    <tr>
+                        <th>Plus grande ville</th>
+                        <td>Issou-sur-YTP</td>
+                    </tr>
+                    <tr>
+                        <th>Langue officielle</th>
+                        <td>Français distordu, Sentence Mixing, Jaajophone</td>
+                    </tr>
+                    <tr>
+                        <th>Gouvernement</th>
+                        <td>Kakistocratie algorithmique</td>
+                    </tr>
+                    <tr>
+                        <th>Chef de l'État</th>
+                        <td>Le Grand Monarque (Sylvain Durif)</td>
+                    </tr>
+                    <tr>
+                        <th>Premier Ministre</th>
+                        <td>Denis Brogniart</td>
+                    </tr>
+                    <tr>
+                        <th>Monnaie</th>
+                        <td>Le Sos (SOS)</td>
+                    </tr>
+                    <tr>
+                        <th>Hymne national</th>
+                        <td><em>L'Onde de Choc (Ear Rape de la Marseillaise)</em></td>
+                    </tr>
+                </table>
+            </div>
+
+            <p>Le <strong>Jaajistan</strong> (officiellement la <strong>République Démocratique du Jaajistan</strong>) est un micro-État souverain et insulaire fictif, situé dans l'océan tumultueux des Internets francophones, quelque part entre l'archipel de Dailymotion et le continent YouTube. Né de l'esprit du mouvement artistique <a href="#">Jaajiste</a>, le pays sert de refuge virtuel aux créateurs de contenu exilés, aux trolls repentis et aux algorithmes défectueux.</p>
+            
+            <p>Connu pour sa géographie instable due aux distorsions spatiales constantes, le Jaajistan est le seul pays au monde où le temps peut s'écouler à l'envers ou bégayer sur une seule frame pendant plusieurs heures.</p>
+
+            <div class="toc">
+                <div class="toc-title">Sommaire</div>
+                <ul>
+                    <li><a href="#histoire">1 Histoire</a>
+                        <ul>
+                            <li><a href="#fondation">1.1 L'Exode et la Fondation (2015)</a></li>
+                            <li><a href="#guerre-droits">1.2 La Grande Guerre des Droits d'Auteur</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#geographie">2 Géographie et Climat</a></li>
+                    <li><a href="#politique">3 Politique et Gouvernement</a></li>
+                    <li><a href="#culture">4 Culture et Société</a></li>
+                </ul>
+            </div>
+
+            <h2 id="histoire">Histoire</h2>
+            
+            <h3 id="fondation">L'Exode et la Fondation (2015)</h3>
+            <p>La création du Jaajistan remonte à la fin de l'année 2015, période trouble connue sous le nom de "Grand Strike". Suite au durcissement des règles de modération de YouTube (le redoutable Content ID), de nombreux "Poopers" virent leurs chaînes supprimées. En réponse, une coalition de créateurs s'est virtuellement réunie sur des serveurs Discord obscurs pour proclamer l'indépendance de leurs œuvres. Le Jaajistan fut officiellement fondé le 32 Smarch 2015 (une date générée aléatoirement par un bug système).</p>
+
+            <h3 id="guerre-droits">La Grande Guerre des Droits d'Auteur</h3>
+            <p>Le jeune pays dut rapidement faire face à des invasions répétées de robots copyright (les "Bots-Sentinelles"). Cette période a forgé l'identité nationale, menant à la création de l'Armée de l'Onde de Choc (A.O.C.), une force de défense utilisant des fréquences sonores inaudibles pour les humains mais destructrices pour les algorithmes d'analyse vidéo.</p>
+
+            <h2 id="geographie">Géographie et Climat</h2>
+            <p>La topographie du Jaajistan est réputée pour son instabilité. Les lois de la physique y sont facultatives. Le pays est bordé à l'ouest par la tristement célèbre <strong>Mer du Sel</strong> (composée des larmes de joueurs e-sport en colère) et au nord par les Terres Arides du 18-25.</p>
+            <p>Le climat est principalement chaotique. Le service météorologique national (présenté par un clone numérique d'Évelyne Dhéliat) annonce régulièrement des pluies de pixels, des ouragans de basses fréquences et des inversions symétriques de la température.</p>
+
+            <h2 id="politique">Politique et Gouvernement</h2>
+            <p>Le système politique du Jaajistan est un modèle unique de <em>Kakistocratie algorithmique</em> (le pouvoir aux pires lignes de code). Le pays est théoriquement dirigé par <strong>Sylvain Durif</strong>, le Christ Cosmique, qui gouverne depuis sa capitale spirituelle située dans la 5ème dimension. Toutefois, la gestion quotidienne est assurée par le Premier Ministre <strong>Denis Brogniart</strong>, dont les conseils des ministres se terminent invariablement par l'extinction d'un flambeau de l'immunité et l'expulsion d'un membre du gouvernement.</p>
+
+            <div class="quote">
+                « Les aventuriers du Jaajistan ont décidé de vous éliminer, et leur sentence est i-i-i-irrévocable. AAAAAH ! »<br>
+                <span style="font-size: 0.9em; color: #555;">— Discours de clôture de l'Assemblée Nationale Jaajistanaise.</span>
+            </div>
+
+            <h2 id="culture">Culture et Société</h2>
+            <p>La culture jaajistanaise est un joyeux bordel. La monnaie locale, le <strong>Sos</strong>, n'a aucune valeur fiduciaire réelle, mais sa valeur fluctue en fonction du nombre de mèmes partagés par seconde sur le territoire.</p>
+            <ul class="content-list">
+                <li><strong>Langue :</strong> Les citoyens ne parlent pas en phrases complètes, mais en extraits sonores découpés et réassemblés. Il n'est pas rare de voir deux personnes converser en utilisant uniquement des cris de Jean-Pierre Coffe et des rires de Julien Lepers.</li>
+                <li><strong>Gastronomie :</strong> Le plat national est la <em>Purée Mousline Inversée</em>, servie dans des assiettes qui tournent sur elles-mêmes grâce à l'effet <em>content-aware scale</em>.</li>
+                <li><strong>Religion :</strong> Le culte principal vénère le "Gros JDG", une entité disparue dont les reliques (des chemises hawaïennes XXL) sont gardées dans le sanctuaire de Fougères.</li>
+            </ul>
+            
+        </main>
+    </div>
+
+</body>
+</html>
